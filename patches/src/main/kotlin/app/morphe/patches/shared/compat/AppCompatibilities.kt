@@ -136,6 +136,13 @@ internal object AppCompatibilities {
         appIconColor = 0x00B020,
     )
 
+    val LIGHTROOM = Compatibility(
+        name = "Lightroom",
+        packageName = "com.adobe.lrmobile",
+        appIconColor = 0x31A8FF,
+        targets = listOf(AppTarget("9.3.0")),
+    )
+
     val PIXIV = Compatibility(
         name = "Pixiv",
         packageName = "jp.pxv.android",
