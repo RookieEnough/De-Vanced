@@ -38,3 +38,8 @@ internal object LoadInboxAdsFingerprint : Fingerprint(
             "InboxAdsItemSupplierImplementation;"
     },
 )
+
+internal object FriendsInboxTrayFingerprint : Fingerprint(
+    returnType = "Z",
+    strings = listOf("com.facebook.messaging.friendsinboxunit.plugins.inboxunit.FriendsInboxUnitKillSwitch"),
+)
