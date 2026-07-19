@@ -22,7 +22,7 @@ val spoofPackageVersionPatch = resourcePatch(
         description = "The version code to set. Must be higher than the Play Store version " +
             "to suppress updates. Defaults to the maximum value.",
         required = true,
-    ) { it != null && it.matches(Regex("^\\d+$")) }
+    ) { it != null && it.matches(Regex("^\\d{1,10}$")) && it.toLong() <= Int.MAX_VALUE.toLong() }
 
     finalize {
         document("AndroidManifest.xml").use { document ->

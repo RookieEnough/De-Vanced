@@ -37,4 +37,5 @@ internal object ExtensionMethodFingerprint : Fingerprint(
  */
 internal object AiFabComponentFingerprint : Fingerprint(
     strings = listOf("AiFabComponent"),
+    filters = OpcodesFilter.opcodesToFilters(Opcode.RETURN_OBJECT),
 )
