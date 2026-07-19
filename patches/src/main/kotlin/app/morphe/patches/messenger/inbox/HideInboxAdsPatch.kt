@@ -16,6 +16,10 @@ val hideInboxAdsPatch = bytecodePatch(
     compatibleWith(AppCompatibilities.MESSENGER)
 
     execute {
-        LoadInboxAdsFingerprint.method.replaceInstruction(0, "return-void")
+        // Newer Messenger versions removed the native inbox-ads item supplier
+        // entirely, so there is nothing to patch and nothing to hide. Match optionally so
+        // selecting this patch never aborts the whole run on those versions; on older
+        // versions that still have the ad loader it no-ops the load method as before.
+        LoadInboxAdsFingerprint.methodOrNull?.replaceInstruction(0, "return-void")
     }
 }
