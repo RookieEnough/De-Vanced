@@ -1766,6 +1766,30 @@
       "options": []
     },
     {
+      "name": "Open links externally",
+      "description": "Always opens links in your default browser instead of the in-app browser, regardless of the in-app setting.",
+      "use": true,
+      "dependencies": [],
+      "compatiblePackages": {
+        "com.facebook.orca": null
+      },
+      "compatibility": [
+        {
+          "name": "Messenger",
+          "packageName": "com.facebook.orca",
+          "description": null,
+          "appIconColor": 550655,
+          "targets": [
+            {
+              "version": "",
+              "experimental": false
+            }
+          ]
+        }
+      ],
+      "options": []
+    },
+    {
       "name": "Override certificate pinning",
       "description": "Overrides certificate pinning, allowing to inspect traffic via a proxy. This patch does not work with Reddit.",
       "use": false,
