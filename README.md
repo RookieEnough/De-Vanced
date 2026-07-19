@@ -59,7 +59,7 @@
 | Inshorts | `com.nis.app` | <ul><li>Hide ads</li></ul> |
 | irplus | `net.binarymode.android.irplus` | <ul><li>Hide Ads</li></ul> |
 | Letterboxd | `com.letterboxd.letterboxd` | <ul><li>Hide ads</li><li>Unlock app icons</li></ul> |
-| Messenger | `com.facebook.orca` | <ul><li>Disable typing indicator</li><li>Hide inbox ads</li><li>Hide inbox subtabs</li><li>Hide Facebook button</li><li>Remove Meta AI</li></ul> |
+| Messenger | `com.facebook.orca` | <ul><li>Disable typing indicator</li><li>Hide inbox ads</li><li>Hide inbox subtabs</li><li>Hide Facebook buttons</li><li>Remove Meta AI</li><li>Open links externally</li><li>Spoof package version</li></ul> |
 | Microsoft Lens | `com.microsoft.office.officelens` | <ul><li>Hide OneDrive migration</li></ul> |
 | Nothing X | `com.nothing.smartcenter` | <ul><li>Hide Ads</li></ul> |
 | NU.nl | `nl.sanomamedia.android.nu` | <ul><li>Hide Ads</li></ul> |

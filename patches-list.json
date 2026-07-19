@@ -1147,8 +1147,8 @@
       "options": []
     },
     {
-      "name": "Hide Facebook button",
-      "description": "Hides the Facebook button in the top toolbar.",
+      "name": "Hide Facebook buttons",
+      "description": "Hides buttons and shortcuts that open Facebook.",
       "use": true,
       "dependencies": [],
       "compatiblePackages": {
@@ -1583,6 +1583,30 @@
       "options": []
     },
     {
+      "name": "Hide inbox stories and notes tray",
+      "description": "Hides the stories and notes horizontal tray at the top of the inbox.",
+      "use": true,
+      "dependencies": [],
+      "compatiblePackages": {
+        "com.facebook.orca": null
+      },
+      "compatibility": [
+        {
+          "name": "Messenger",
+          "packageName": "com.facebook.orca",
+          "description": null,
+          "appIconColor": 550655,
+          "targets": [
+            {
+              "version": "",
+              "experimental": false
+            }
+          ]
+        }
+      ],
+      "options": []
+    },
+    {
       "name": "Hide inbox subtabs",
       "description": "Hides Home and Channels tabs between active now tray and chats.",
       "use": true,
@@ -1731,6 +1755,30 @@
           "packageName": "com.microblink.photomath",
           "description": null,
           "appIconColor": 13778751,
+          "targets": [
+            {
+              "version": "",
+              "experimental": false
+            }
+          ]
+        }
+      ],
+      "options": []
+    },
+    {
+      "name": "Open links externally",
+      "description": "Always opens links in your default browser instead of the in-app browser, regardless of the in-app setting.",
+      "use": true,
+      "dependencies": [],
+      "compatiblePackages": {
+        "com.facebook.orca": null
+      },
+      "compatibility": [
+        {
+          "name": "Messenger",
+          "packageName": "com.facebook.orca",
+          "description": null,
+          "appIconColor": 550655,
           "targets": [
             {
               "version": "",
@@ -2432,6 +2480,11 @@
             "com.google.android.apps.photos.PIXEL_2018_PRELOAD",
             "com.google.android.apps.photos.PIXEL_2019_MIDYEAR_PRELOAD",
             "com.google.android.apps.photos.PIXEL_2019_PRELOAD",
+            "com.google.android.feature.PIXEL_EXPERIENCE",
+            "com.google.android.feature.PIXEL_2017_EXPERIENCE",
+            "com.google.android.feature.PIXEL_2018_EXPERIENCE",
+            "com.google.android.feature.PIXEL_2019_MIDYEAR_EXPERIENCE",
+            "com.google.android.feature.PIXEL_2019_EXPERIENCE",
             "com.google.android.feature.PIXEL_2020_MIDYEAR_EXPERIENCE",
             "com.google.android.feature.PIXEL_2020_EXPERIENCE",
             "com.google.android.feature.PIXEL_2021_MIDYEAR_EXPERIENCE",
@@ -2443,8 +2496,44 @@
             "com.google.android.feature.PIXEL_2024_MIDYEAR_EXPERIENCE",
             "com.google.android.feature.PIXEL_2024_EXPERIENCE",
             "com.google.android.feature.PIXEL_2025_MIDYEAR_EXPERIENCE",
-            "com.google.android.feature.PIXEL_2025_EXPERIENCE"
+            "com.google.android.feature.PIXEL_2025_EXPERIENCE",
+            "com.google.android.feature.PIXEL_2026_MIDYEAR_EXPERIENCE",
+            "com.google.android.feature.PIXEL_2026_EXPERIENCE"
           ],
+          "values": null
+        }
+      ]
+    },
+    {
+      "name": "Spoof package version",
+      "description": "Sets a very high version code so the Play Store treats the app as already up to date and never offers an update.",
+      "use": false,
+      "dependencies": [],
+      "compatiblePackages": {
+        "com.facebook.orca": null
+      },
+      "compatibility": [
+        {
+          "name": "Messenger",
+          "packageName": "com.facebook.orca",
+          "description": null,
+          "appIconColor": 550655,
+          "targets": [
+            {
+              "version": "",
+              "experimental": false
+            }
+          ]
+        }
+      ],
+      "options": [
+        {
+          "key": "versionCode",
+          "title": "Version code",
+          "description": "The version code to set. Must be higher than the Play Store version to suppress updates. Defaults to the maximum value.",
+          "required": true,
+          "type": "kotlin.String",
+          "default": "2147483647",
           "values": null
         }
       ]

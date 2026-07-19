@@ -28,3 +28,14 @@ internal object ExtensionMethodFingerprint : Fingerprint(
         method.name == EXTENSION_METHOD_NAME && classDef.type == EXTENSION_CLASS_DESCRIPTOR
     },
 )
+
+/**
+ * Matches the render method of the Meta AI floating button ("AI FAB") component. The
+ * component logs under its own name `AiFabComponent`, and its render returns the FAB's
+ * Litho tree; forcing it to return null makes the FAB render nothing on every surface
+ * it appears on (Chats, Notifications, etc.).
+ */
+internal object AiFabComponentFingerprint : Fingerprint(
+    strings = listOf("AiFabComponent"),
+    filters = OpcodesFilter.opcodesToFilters(Opcode.RETURN_OBJECT),
+)
