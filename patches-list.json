@@ -1,5 +1,5 @@
 {
-  "version": "v1.0.4",
+  "version": "1.0.4",
   "appNames": {
     "com.amazon.mShop.android.shopping": "Amazon Shopping",
     "com.amazon.mp3": "Amazon Music",
@@ -2500,6 +2500,40 @@
             "com.google.android.feature.PIXEL_2026_MIDYEAR_EXPERIENCE",
             "com.google.android.feature.PIXEL_2026_EXPERIENCE"
           ],
+          "values": null
+        }
+      ]
+    },
+    {
+      "name": "Spoof package version",
+      "description": "Sets a very high version code so the Play Store treats the app as already up to date and never offers an update.",
+      "use": false,
+      "dependencies": [],
+      "compatiblePackages": {
+        "com.facebook.orca": null
+      },
+      "compatibility": [
+        {
+          "name": "Messenger",
+          "packageName": "com.facebook.orca",
+          "description": null,
+          "appIconColor": 550655,
+          "targets": [
+            {
+              "version": "",
+              "experimental": false
+            }
+          ]
+        }
+      ],
+      "options": [
+        {
+          "key": "versionCode",
+          "title": "Version code",
+          "description": "The version code to set. Must be higher than the Play Store version to suppress updates. Defaults to the maximum value.",
+          "required": true,
+          "type": "kotlin.String",
+          "default": "2147483647",
           "values": null
         }
       ]
