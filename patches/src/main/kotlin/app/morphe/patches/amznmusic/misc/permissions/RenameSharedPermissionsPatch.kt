@@ -15,7 +15,7 @@ import org.w3c.dom.Element
 val renameSharedPermissionsPatch = resourcePatch(
     name = "Rename shared permissions",
     description = "Rename certain permissions shared across Amazon apps. " +
-            "Applying this patch can fix installation errors, but can also break features in certain apps.",
+            "Applying this patch can fix installation errors, but can also break features in certain apps."
 ) {
     compatibleWith(AppCompatibilities.AMAZON_MUSIC)
 
