@@ -1,40 +1,40 @@
 {
-  "version": "1.0.4",
+  "version": "v1.0.4",
   "appNames": {
-    "com.amazon.mShop.android.shopping": "Amazon Shopping",
-    "com.amazon.mp3": "Amazon Music",
-    "com.drinkplusplus.angulus": "Angulus",
-    "com.bandcamp.android": "Bandcamp",
-    "com.cricbuzz.android": "Cricbuzz",
-    "com.disney.disneyplus": "Disney+",
-    "com.facebook.katana": "Facebook",
-    "de.gmx.mobile.android.mail": "GMX Mail",
-    "com.google.android.apps.magazines": "Google News",
-    "com.google.android.apps.photos": "Google Photos",
-    "com.google.android.apps.recorder": "Google Recorder",
-    "com.myprog.hexedit": "Hex Editor",
-    "ginlemon.iconpackstudio": "Icon Pack Studio",
-    "com.nis.app": "Inshorts",
-    "net.binarymode.android.irplus": "irplus",
     "com.letterboxd.letterboxd": "Letterboxd",
-    "com.facebook.orca": "Messenger",
-    "com.microsoft.office.officelens": "Microsoft Lens",
-    "com.nothing.smartcenter": "Nothing X",
-    "nl.sanomamedia.android.nu": "NU.nl",
     "com.peacocktv.peacockandroid": "Peacock TV",
-    "com.microblink.photomath": "Photomath",
-    "com.adobe.photoshopmix": "Photoshop Mix",
-    "jp.pxv.android": "Pixiv",
-    "ch.protonmail.android": "Proton Mail",
-    "com.rarlab.rar": "RAR",
     "com.soundcloud.android": "SoundCloud",
-    "com.strava": "Strava",
-    "com.instagram.barcelona": "Threads",
+    "nl.sanomamedia.android.nu": "NU.nl",
+    "com.cricbuzz.android": "Cricbuzz",
+    "com.google.android.apps.magazines": "Google News",
+    "com.rarlab.rar": "RAR",
+    "com.nis.app": "Inshorts",
+    "com.tumblr": "Tumblr",
+    "com.facebook.orca": "Messenger",
+    "com.amazon.mp3": "Amazon Music",
+    "de.gmx.mobile.android.mail": "GMX Mail",
+    "ch.protonmail.android": "Proton Mail",
+    "com.viber.voip": "Viber",
     "com.ss.android.ugc.trill": "TikTok (JP)",
     "com.zhiliaoapp.musically": "TikTok",
-    "com.tumblr": "Tumblr",
+    "com.microsoft.office.officelens": "Microsoft Lens",
+    "com.instagram.barcelona": "Threads",
+    "com.google.android.apps.recorder": "Google Recorder",
+    "com.nothing.smartcenter": "Nothing X",
+    "com.amazon.mShop.android.shopping": "Amazon Shopping",
+    "com.disney.disneyplus": "Disney+",
+    "com.drinkplusplus.angulus": "Angulus",
+    "com.bandcamp.android": "Bandcamp",
+    "com.microblink.photomath": "Photomath",
+    "net.binarymode.android.irplus": "irplus",
+    "com.myprog.hexedit": "Hex Editor",
+    "com.adobe.photoshopmix": "Photoshop Mix",
+    "com.facebook.katana": "Facebook",
+    "com.strava": "Strava",
+    "jp.pxv.android": "Pixiv",
+    "com.google.android.apps.photos": "Google Photos",
     "tv.twitch.android.app": "Twitch",
-    "com.viber.voip": "Viber"
+    "ginlemon.iconpackstudio": "Icon Pack Studio"
   },
   "patches": [
     {
@@ -983,30 +983,6 @@
       "options": []
     },
     {
-      "name": "Fix selected account persistence",
-      "description": "Prevents Google Photos from clearing the selected account after cold start when using MicroG.",
-      "use": true,
-      "dependencies": [],
-      "compatiblePackages": {
-        "com.google.android.apps.photos": null
-      },
-      "compatibility": [
-        {
-          "name": "Google Photos",
-          "packageName": "com.google.android.apps.photos",
-          "description": null,
-          "appIconColor": 16531260,
-          "targets": [
-            {
-              "version": "",
-              "experimental": false
-            }
-          ]
-        }
-      ],
-      "options": []
-    },
-    {
       "name": "Force enable FreePhone",
       "description": "Enables the FreePhone menu in the navigation drawer even on devices that do not support eSIM.",
       "use": true,
@@ -1067,7 +1043,6 @@
       "dependencies": [
         "ResourcePatch",
         "ResourcePatch",
-        "BytecodePatch",
         "BytecodePatch"
       ],
       "compatiblePackages": {
@@ -1224,104 +1199,6 @@
       "use": true,
       "dependencies": [],
       "compatiblePackages": {
-        "com.drinkplusplus.angulus": null
-      },
-      "compatibility": [
-        {
-          "name": "Angulus",
-          "packageName": "com.drinkplusplus.angulus",
-          "description": null,
-          "appIconColor": 2201331,
-          "targets": [
-            {
-              "version": "",
-              "experimental": false
-            }
-          ]
-        }
-      ],
-      "options": []
-    },
-    {
-      "name": "Hide ads",
-      "description": null,
-      "use": true,
-      "dependencies": [],
-      "compatiblePackages": {
-        "com.cricbuzz.android": [
-          "6.24.01"
-        ]
-      },
-      "compatibility": [
-        {
-          "name": "Cricbuzz",
-          "packageName": "com.cricbuzz.android",
-          "description": null,
-          "appIconColor": 37488,
-          "targets": [
-            {
-              "version": "6.24.01",
-              "experimental": false
-            }
-          ]
-        }
-      ],
-      "options": []
-    },
-    {
-      "name": "Hide ads",
-      "description": "Hides sponsored ads.",
-      "use": true,
-      "dependencies": [],
-      "compatiblePackages": {
-        "de.gmx.mobile.android.mail": null
-      },
-      "compatibility": [
-        {
-          "name": "GMX Mail",
-          "packageName": "de.gmx.mobile.android.mail",
-          "description": null,
-          "appIconColor": 13209,
-          "targets": [
-            {
-              "version": "",
-              "experimental": false
-            }
-          ]
-        }
-      ],
-      "options": []
-    },
-    {
-      "name": "Hide ads",
-      "description": null,
-      "use": true,
-      "dependencies": [],
-      "compatiblePackages": {
-        "com.nis.app": null
-      },
-      "compatibility": [
-        {
-          "name": "Inshorts",
-          "packageName": "com.nis.app",
-          "description": null,
-          "appIconColor": 15022389,
-          "targets": [
-            {
-              "version": "",
-              "experimental": false
-            }
-          ]
-        }
-      ],
-      "options": []
-    },
-    {
-      "name": "Hide ads",
-      "description": null,
-      "use": true,
-      "dependencies": [],
-      "compatiblePackages": {
         "com.letterboxd.letterboxd": null
       },
       "compatibility": [
@@ -1330,32 +1207,6 @@
           "packageName": "com.letterboxd.letterboxd",
           "description": null,
           "appIconColor": 45088,
-          "targets": [
-            {
-              "version": "",
-              "experimental": false
-            }
-          ]
-        }
-      ],
-      "options": []
-    },
-    {
-      "name": "Hide ads",
-      "description": "Hide ads and sponsored articles in list pages and remove pre-roll ads on videos.",
-      "use": true,
-      "dependencies": [
-        "BytecodePatch"
-      ],
-      "compatiblePackages": {
-        "nl.sanomamedia.android.nu": null
-      },
-      "compatibility": [
-        {
-          "name": "NU.nl",
-          "packageName": "nl.sanomamedia.android.nu",
-          "description": null,
-          "appIconColor": 14811162,
           "targets": [
             {
               "version": "",
@@ -1396,32 +1247,6 @@
       "use": true,
       "dependencies": [],
       "compatiblePackages": {
-        "jp.pxv.android": [
-          "6.141.1"
-        ]
-      },
-      "compatibility": [
-        {
-          "name": "Pixiv",
-          "packageName": "jp.pxv.android",
-          "description": null,
-          "appIconColor": 38650,
-          "targets": [
-            {
-              "version": "6.141.1",
-              "experimental": false
-            }
-          ]
-        }
-      ],
-      "options": []
-    },
-    {
-      "name": "Hide ads",
-      "description": null,
-      "use": true,
-      "dependencies": [],
-      "compatiblePackages": {
         "com.soundcloud.android": [
           "2025.05.27-release"
         ]
@@ -1435,6 +1260,106 @@
           "targets": [
             {
               "version": "2025.05.27-release",
+              "experimental": false
+            }
+          ]
+        }
+      ],
+      "options": []
+    },
+    {
+      "name": "Hide ads",
+      "description": "Hide ads and sponsored articles in list pages and remove pre-roll ads on videos.",
+      "use": true,
+      "dependencies": [
+        "BytecodePatch"
+      ],
+      "compatiblePackages": {
+        "nl.sanomamedia.android.nu": null
+      },
+      "compatibility": [
+        {
+          "name": "NU.nl",
+          "packageName": "nl.sanomamedia.android.nu",
+          "description": null,
+          "appIconColor": 14811162,
+          "targets": [
+            {
+              "version": "",
+              "experimental": false
+            }
+          ]
+        }
+      ],
+      "options": []
+    },
+    {
+      "name": "Hide ads",
+      "description": null,
+      "use": true,
+      "dependencies": [],
+      "compatiblePackages": {
+        "com.cricbuzz.android": [
+          "6.24.01"
+        ]
+      },
+      "compatibility": [
+        {
+          "name": "Cricbuzz",
+          "packageName": "com.cricbuzz.android",
+          "description": null,
+          "appIconColor": 37488,
+          "targets": [
+            {
+              "version": "6.24.01",
+              "experimental": false
+            }
+          ]
+        }
+      ],
+      "options": []
+    },
+    {
+      "name": "Hide ads",
+      "description": null,
+      "use": true,
+      "dependencies": [],
+      "compatiblePackages": {
+        "com.nis.app": null
+      },
+      "compatibility": [
+        {
+          "name": "Inshorts",
+          "packageName": "com.nis.app",
+          "description": null,
+          "appIconColor": 15022389,
+          "targets": [
+            {
+              "version": "",
+              "experimental": false
+            }
+          ]
+        }
+      ],
+      "options": []
+    },
+    {
+      "name": "Hide ads",
+      "description": "Hides sponsored ads.",
+      "use": true,
+      "dependencies": [],
+      "compatiblePackages": {
+        "de.gmx.mobile.android.mail": null
+      },
+      "compatibility": [
+        {
+          "name": "GMX Mail",
+          "packageName": "de.gmx.mobile.android.mail",
+          "description": null,
+          "appIconColor": 13209,
+          "targets": [
+            {
+              "version": "",
               "experimental": false
             }
           ]
@@ -1461,6 +1386,56 @@
           "targets": [
             {
               "version": "382.0.0.51.85",
+              "experimental": false
+            }
+          ]
+        }
+      ],
+      "options": []
+    },
+    {
+      "name": "Hide ads",
+      "description": null,
+      "use": true,
+      "dependencies": [],
+      "compatiblePackages": {
+        "com.drinkplusplus.angulus": null
+      },
+      "compatibility": [
+        {
+          "name": "Angulus",
+          "packageName": "com.drinkplusplus.angulus",
+          "description": null,
+          "appIconColor": 2201331,
+          "targets": [
+            {
+              "version": "",
+              "experimental": false
+            }
+          ]
+        }
+      ],
+      "options": []
+    },
+    {
+      "name": "Hide ads",
+      "description": null,
+      "use": true,
+      "dependencies": [],
+      "compatiblePackages": {
+        "jp.pxv.android": [
+          "6.141.1"
+        ]
+      },
+      "compatibility": [
+        {
+          "name": "Pixiv",
+          "packageName": "jp.pxv.android",
+          "description": null,
+          "appIconColor": 38650,
+          "targets": [
+            {
+              "version": "6.141.1",
               "experimental": false
             }
           ]
@@ -1561,6 +1536,30 @@
     {
       "name": "Hide inbox ads",
       "description": "Hides ads in inbox.",
+      "use": true,
+      "dependencies": [],
+      "compatiblePackages": {
+        "com.facebook.orca": null
+      },
+      "compatibility": [
+        {
+          "name": "Messenger",
+          "packageName": "com.facebook.orca",
+          "description": null,
+          "appIconColor": 550655,
+          "targets": [
+            {
+              "version": "",
+              "experimental": false
+            }
+          ]
+        }
+      ],
+      "options": []
+    },
+    {
+      "name": "Hide inbox stories and notes tray",
+      "description": "Hides the stories and notes horizontal tray at the top of the inbox.",
       "use": true,
       "dependencies": [],
       "compatiblePackages": {
@@ -2432,6 +2431,11 @@
             "com.google.android.apps.photos.PIXEL_2018_PRELOAD",
             "com.google.android.apps.photos.PIXEL_2019_MIDYEAR_PRELOAD",
             "com.google.android.apps.photos.PIXEL_2019_PRELOAD",
+            "com.google.android.feature.PIXEL_EXPERIENCE",
+            "com.google.android.feature.PIXEL_2017_EXPERIENCE",
+            "com.google.android.feature.PIXEL_2018_EXPERIENCE",
+            "com.google.android.feature.PIXEL_2019_MIDYEAR_EXPERIENCE",
+            "com.google.android.feature.PIXEL_2019_EXPERIENCE",
             "com.google.android.feature.PIXEL_2020_MIDYEAR_EXPERIENCE",
             "com.google.android.feature.PIXEL_2020_EXPERIENCE",
             "com.google.android.feature.PIXEL_2021_MIDYEAR_EXPERIENCE",
@@ -2443,7 +2447,9 @@
             "com.google.android.feature.PIXEL_2024_MIDYEAR_EXPERIENCE",
             "com.google.android.feature.PIXEL_2024_EXPERIENCE",
             "com.google.android.feature.PIXEL_2025_MIDYEAR_EXPERIENCE",
-            "com.google.android.feature.PIXEL_2025_EXPERIENCE"
+            "com.google.android.feature.PIXEL_2025_EXPERIENCE",
+            "com.google.android.feature.PIXEL_2026_MIDYEAR_EXPERIENCE",
+            "com.google.android.feature.PIXEL_2026_EXPERIENCE"
           ],
           "values": null
         }

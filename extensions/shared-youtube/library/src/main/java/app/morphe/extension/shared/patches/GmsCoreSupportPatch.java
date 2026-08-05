@@ -151,6 +151,15 @@ public class GmsCoreSupportPatch {
                 return;
             }
 
+            // Google Photos' current OneGoogle account UI asks newer Play Services APIs for the
+            // profile image. GmsCore has the avatar, but those APIs are not implemented yet, so
+            // Photos falls back to the account's first letter. Bridge the authenticated profile
+            // image into the two OneGoogle avatar views until GmsCore implements that API.
+            if (context.getResources().getIdentifier(
+                    "og_apd_internal_image_view", "id", context.getPackageName()) != 0) {
+                GooglePhotosAccountAvatar.install(context);
+            }
+
             // Check if GmsCore is whitelisted from battery optimizations.
             if (isAndroidAutomotive(context)) {
                 // Ignore Android Automotive devices (Google built-in),

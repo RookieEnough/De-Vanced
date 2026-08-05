@@ -20,6 +20,9 @@ output-metadata.json
 
 # IntelliJ
 *.iml
+
+# Local APKs, patched outputs, and reverse-engineering scratch files.
+/artifacts/
 .idea/
 misc.xml
 deploymentTargetDropDown.xml

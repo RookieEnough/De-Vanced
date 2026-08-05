@@ -5,7 +5,6 @@
 package app.morphe.patches.googlephotos.misc.gms
 
 import app.morphe.patches.googlephotos.misc.extension.sharedExtensionPatch
-import app.morphe.patches.googlephotos.misc.login.selectedAccountPatch
 import app.morphe.patches.shared.compat.AppCompatibilities
 import app.morphe.patches.googlephotos.misc.gms.Constants.MORPHE_PHOTOS_PACKAGE_NAME
 import app.morphe.patches.googlephotos.misc.gms.Constants.PHOTOS_PACKAGE_NAME
@@ -22,7 +21,6 @@ val gmsCoreSupportPatch = gmsCoreSupportPatch(
     extensionPatch = sharedExtensionPatch,
     gmsCoreSupportResourcePatchFactory = ::gmsCoreSupportResourcePatch,
 ) {
-    dependsOn(selectedAccountPatch)
     compatibleWith(AppCompatibilities.GOOGLE_PHOTOS)
 }
 
@@ -49,4 +47,3 @@ private fun gmsCoreSupportResourcePatch() =
         spoofedPackageSignature = "24bb24c05e47e0aefa68a58a766179d9b613a600",
         screen = DummyPreferenceScreen.SCREEN,
     )
-

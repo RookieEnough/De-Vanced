@@ -211,6 +211,20 @@ fun gmsCoreSupportPatch(
             GooglePlayUtilityFingerprint.method.returnEarly(0)
         }
 
+        // The bundled GooglePlayServicesUtilLight check returns an int ConnectionResult code.
+        // Returning SUCCESS (0) lets Photos finish account/profile initialization with GmsCore.
+        IsGooglePlayServicesAvailableFingerprint.methodOrNull?.returnEarly(0)
+
+        // Catch exception in MapView.c() when Google Maps v2 SDK is missing in GmsCore.
+        MapViewInitFingerprint.methodOrNull?.apply {
+            instructions.indexOfLast { it.opcode == Opcode.THROW }.let { index ->
+                if (index != -1) {
+                    replaceInstruction(index, "return-void")
+                }
+            }
+        }
+
+
         // Set original and patched package names for extension to use.
         OriginalPackageNameExtensionFingerprint.method.returnEarly(fromPackageName)
 
