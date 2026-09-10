@@ -124,7 +124,10 @@ internal object AppCompatibilities {
         name = "Pixiv",
         packageName = "jp.pxv.android",
         appIconColor = 0x0096FA,
-        targets = listOf(AppTarget("6.196.0")),
+        targets = listOf(
+            AppTarget("6.196.0"),
+            AppTarget("6.141.1")
+        )
     )
 
     val CRICBUZZ = Compatibility(

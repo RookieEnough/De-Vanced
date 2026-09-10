@@ -12,7 +12,7 @@ import app.morphe.util.returnEarly
 val hideAdsPatch = bytecodePatch(
     name = "Hide ads",
 ) {
-    compatibleWith(AppCompatibilities.PIXIV_ADS)
+    compatibleWith(AppCompatibilities.PIXIV)
 
     execute {
         ShouldShowAdsFingerprint.method.returnEarly(false)
