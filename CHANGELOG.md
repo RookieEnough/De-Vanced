@@ -1,3 +1,9 @@
+## [1.3.3](https://github.com/RookieEnough/De-Vanced/compare/v1.3.2...v1.3.3) (2026-09-10)
+
+### 🐛 Bug Fixes
+
+* **Google Photos:** Add version recommendation ([ccc5c29](https://github.com/RookieEnough/De-Vanced/commit/ccc5c292e5fad038f26324743400d12ed3596a30))
+
 ## [1.3.3-dev.1](https://github.com/RookieEnough/De-Vanced/compare/v1.3.2...v1.3.3-dev.1) (2026-09-10)
 
 ### 🐛 Bug Fixes
