@@ -1,22 +1,37 @@
 /*
+ * Copyright 2026 De-Vanced
+ * https://github.com/RookieEnough/De-Vanced
+ *
  * Forked from:
  * https://gitlab.com/ReVanced/revanced-patches/-/blob/main/patches/src/main/kotlin/app/revanced/patches/pixiv/ads/Fingerprints.kt
  */
 package app.morphe.patches.pixiv.ads
 
 import app.morphe.patcher.Fingerprint
+import app.morphe.patcher.InstructionLocation.MatchAfterWithin
+import app.morphe.patcher.methodCall
 import com.android.tools.smali.dexlib2.AccessFlags
+import com.android.tools.smali.dexlib2.Opcode
 
-internal object ShouldShowAdsFingerprint : Fingerprint(
+internal object ShouldShowAdsLegacyFingerprint : Fingerprint(
+    definingClass = "/AdUtils;",
+    name = "shouldShowAds",
     accessFlags = listOf(AccessFlags.PUBLIC, AccessFlags.FINAL),
     returnType = "Z",
-    parameters = listOf(),
-    custom = { methodDef, classDef ->
-        // Pixiv 6.196.0 obfuscates AdUtils to the default-package class `zc`
-        // and renames shouldShowAds() to a(). Keep the original signature so
-        // the patch remains usable with the previously supported release.
-        (classDef.type.endsWith("AdUtils;") && methodDef.name == "shouldShowAds") ||
-            (classDef.type == "Lzc;" && methodDef.name == "a")
-    },
 )
 
+internal object ShouldShowAdsFingerprint : Fingerprint(
+    name = "invokeSuspend",
+    filters = listOf(
+        methodCall(
+            opcode = Opcode.INVOKE_VIRTUAL,
+            smali = "Lcom/applovin/mediation/ads/MaxInterstitialAd;->isReady()Z"
+        ),
+        methodCall(
+            opcode = Opcode.INVOKE_VIRTUAL,
+            returnType = "Z",
+            parameters = listOf(),
+            location = MatchAfterWithin(20)
+        )
+    )
+)
