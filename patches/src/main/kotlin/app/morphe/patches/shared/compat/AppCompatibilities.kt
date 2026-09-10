@@ -112,6 +112,9 @@ internal object AppCompatibilities {
         name = "Google Photos",
         packageName = "com.google.android.apps.photos",
         appIconColor = 0xFC3F3C,
+        targets = listOf(
+            AppTarget(version = "7.90.0.971743778")
+        )
     )
 
     val LETTERBOXD = Compatibility(
