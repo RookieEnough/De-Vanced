@@ -1,3 +1,9 @@
+## [1.4.0](https://github.com/RookieEnough/De-Vanced/compare/v1.3.4...v1.4.0) (2026-09-11)
+
+### ✨ New Features
+
+* **Pixv:** Add limited support for `6.196.0` ([c015942](https://github.com/RookieEnough/De-Vanced/commit/c015942828a4b9847e233da26bcd8aa1eb54b548))
+
 ## [1.3.4](https://github.com/RookieEnough/De-Vanced/compare/v1.3.3...v1.3.4) (2026-09-11)
 
 ### 🐛 Bug Fixes
