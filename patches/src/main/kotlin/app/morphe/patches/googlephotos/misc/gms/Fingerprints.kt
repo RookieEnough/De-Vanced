@@ -24,5 +24,8 @@ internal object HomeActivityOnCreateFingerprint : Fingerprint(
 internal object IsGooglePlayServicesAvailableFingerprint : Fingerprint(
     returnType = "I",
     parameters = listOf("L", "I"),
-    strings = listOf("Google Play Services not available"),
+    strings = listOf(
+        "com.google.android.gms.version",
+        "com.google.app.id",
+    ),
 )
