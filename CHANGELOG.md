@@ -1,3 +1,9 @@
+## [1.4.1-dev.1](https://github.com/RookieEnough/De-Vanced/compare/v1.4.0...v1.4.1-dev.1) (2026-09-13)
+
+### 🚀 Updated App Support
+
+* **Google Photos:** Add support for `7.92.0.977185651` ([d9eb14d](https://github.com/RookieEnough/De-Vanced/commit/d9eb14ded12660ef5182b014bdf54b77184a36a4))
+
 ## [1.4.0](https://github.com/RookieEnough/De-Vanced/compare/v1.3.4...v1.4.0) (2026-09-11)
 
 ### ✨ New Features

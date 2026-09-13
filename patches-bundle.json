@@ -1,7 +1,7 @@
 {
-  "created_at": "2026-09-11T17:02:10",
-  "description": "## [1.4.0](https://github.com/RookieEnough/De-Vanced/compare/v1.3.4...v1.4.0) (2026-09-11)\n\n### ✨ New Features\n\n* **Pixv:** Add limited support for `6.196.0` ([c015942](https://github.com/RookieEnough/De-Vanced/commit/c015942828a4b9847e233da26bcd8aa1eb54b548))",
-  "download_url": "https://github.com/RookieEnough/De-Vanced/releases/download/v1.4.0/patches-1.4.0.mpp",
+  "created_at": "2026-09-13T09:25:30",
+  "description": "## [1.4.1-dev.1](https://github.com/RookieEnough/De-Vanced/compare/v1.4.0...v1.4.1-dev.1) (2026-09-13)\n\n### 🚀 Updated App Support\n\n* **Google Photos:** Add support for `7.92.0.977185651` ([d9eb14d](https://github.com/RookieEnough/De-Vanced/commit/d9eb14ded12660ef5182b014bdf54b77184a36a4))",
+  "download_url": "https://github.com/RookieEnough/De-Vanced/releases/download/v1.4.1-dev.1/patches-1.4.1-dev.1.mpp",
   "signature_download_url": "",
-  "version": "1.4.0"
+  "version": "1.4.1-dev.1"
 }

@@ -1,6 +1,6 @@
 {
   "NOTE": "Do NOT manually edit this file. This file is automatically updated when semantic release (release.yml) runs. Manually editing this file can break your releases and break third party tools that use this file.",
-  "version": "1.4.0",
+  "version": "1.4.1-dev.1",
   "patches": [
     {
       "name": "Add 'Give Kudos' button to 'Group Activity'",
@@ -495,6 +495,13 @@
           "signatures": null,
           "targets": [
             {
+              "version": "7.92.0.977185651",
+              "versionCodes": null,
+              "isExperimental": false,
+              "minSdk": null,
+              "description": null
+            },
+            {
               "version": "7.80.0.929302933",
               "versionCodes": null,
               "isExperimental": false,
@@ -546,6 +553,13 @@
           "appIconColor": "#FC3F3C",
           "signatures": null,
           "targets": [
+            {
+              "version": "7.92.0.977185651",
+              "versionCodes": null,
+              "isExperimental": false,
+              "minSdk": null,
+              "description": null
+            },
             {
               "version": "7.80.0.929302933",
               "versionCodes": null,
@@ -603,6 +617,13 @@
           "appIconColor": "#FC3F3C",
           "signatures": null,
           "targets": [
+            {
+              "version": "7.92.0.977185651",
+              "versionCodes": null,
+              "isExperimental": false,
+              "minSdk": null,
+              "description": null
+            },
             {
               "version": "7.80.0.929302933",
               "versionCodes": null,
@@ -1651,6 +1672,13 @@
           "appIconColor": "#FC3F3C",
           "signatures": null,
           "targets": [
+            {
+              "version": "7.92.0.977185651",
+              "versionCodes": null,
+              "isExperimental": false,
+              "minSdk": null,
+              "description": null
+            },
             {
               "version": "7.80.0.929302933",
               "versionCodes": null,
