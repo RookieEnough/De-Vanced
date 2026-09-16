@@ -130,10 +130,13 @@ internal object AppCompatibilities {
         appIconColor = 0x0096FA,
         targets = listOf(
             AppTarget("6.141.1"),
+            AppTarget("6.196.0"),
         )
     )
 
-    val PIXIV_ADS = PIXIV.including(AppTarget("6.196.0"))
+    // Both Pixiv patches support the same versions; kept as an alias so callers
+    // do not need to change (and to avoid duplicating the 6.196.0 target).
+    val PIXIV_ADS = PIXIV
 
     val CRICBUZZ = Compatibility(
         name = "Cricbuzz",
