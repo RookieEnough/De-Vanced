@@ -18,13 +18,11 @@ val hideAdsPatch = bytecodePatch(
     compatibleWith(AppCompatibilities.PIXIV_ADS)
 
     execute {
-        val method = if (packageMetadata.versionName == "6.141.1") {
-            ShouldShowAdsLegacyFingerprint.method
+        if (packageMetadata.versionName == "6.141.1") {
+            ShouldShowAdsLegacyFingerprint.method.returnEarly(false)
         } else {
-            ShouldShowAdsFingerprint.instructionMatches.first().getMethodCalled()
+            ShouldShowAdsGateFingerprint.method.returnEarly(false)
         }
-
-        method.returnEarly(false)
     }
 }
 
