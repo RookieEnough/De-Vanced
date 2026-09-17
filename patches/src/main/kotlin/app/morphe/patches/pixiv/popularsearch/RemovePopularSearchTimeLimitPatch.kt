@@ -8,13 +8,13 @@ package app.morphe.patches.pixiv.popularsearch
 import app.morphe.patcher.Fingerprint
 import app.morphe.patcher.extensions.InstructionExtensions.getInstruction
 import app.morphe.patcher.extensions.InstructionExtensions.replaceInstruction
+import app.morphe.patcher.patch.PatchException
 import app.morphe.patcher.patch.bytecodePatch
 import app.morphe.patches.shared.compat.AppCompatibilities
-import app.morphe.util.getReference
-import app.morphe.util.indexOfFirstInstructionOrThrow
 import com.android.tools.smali.dexlib2.Opcode
 import com.android.tools.smali.dexlib2.iface.instruction.OneRegisterInstruction
-import com.android.tools.smali.dexlib2.iface.reference.FieldReference
+import com.android.tools.smali.dexlib2.iface.instruction.formats.Instruction21t
+import com.android.tools.smali.dexlib2.iface.instruction.formats.Instruction22c
 
 @Suppress("unused")
 val removePopularSearchTimeLimitPatch = bytecodePatch(
@@ -50,15 +50,32 @@ val removePopularSearchTimeLimitPatch = bytecodePatch(
             pinTrialCountdownToSevenDays(SearchResultTrialGateFingerprint)
 
             // 6.196.0 additionally gates the trial page behind a server-driven flag
-            // (rc3.a, defaulting to false when the server omits it): force it to true.
-            // The premium gate above it is intentionally left untouched.
+            // that defaults to false when the server omits it: force the flag read
+            // to true. The read is located structurally (an iget-boolean directly
+            // feeding an if-eqz on the same register, unique in this method), so no
+            // obfuscated names are involved. The premium gate above it is
+            // intentionally left untouched.
             SearchResultTrialGateFingerprint.method.apply {
-                val flagReadIndex = indexOfFirstInstructionOrThrow {
-                    opcode == Opcode.IGET_BOOLEAN &&
-                        getReference<FieldReference>()?.let { it.definingClass == "Lrc3;" && it.name == "a" } == true
-                }
-                val flagRegister = getInstruction<OneRegisterInstruction>(flagReadIndex).registerA
+                val instructions = implementation?.instructions?.toList()
+                    ?: throw PatchException("Trial gate method has no implementation")
 
+                var flagReadIndex = -1
+                for (i in 1 until instructions.size) {
+                    val previous = instructions[i - 1]
+                    val current = instructions[i]
+                    val previousRegister = (previous as? Instruction22c)
+                        ?.takeIf { previous.opcode == Opcode.IGET_BOOLEAN }?.registerA
+                    val currentRegister = (current as? Instruction21t)
+                        ?.takeIf { current.opcode == Opcode.IF_EQZ }?.registerA
+
+                    if (previousRegister != null && previousRegister == currentRegister) {
+                        if (flagReadIndex != -1) throw PatchException("Ambiguous trial flag read")
+                        flagReadIndex = i - 1
+                    }
+                }
+                if (flagReadIndex == -1) throw PatchException("Trial flag read not found")
+
+                val flagRegister = (instructions[flagReadIndex] as Instruction22c).registerA
                 replaceInstruction(
                     flagReadIndex,
                     "const/4 v$flagRegister, 0x1"
