@@ -15,7 +15,7 @@ import app.morphe.util.returnEarly
 val hideAdsPatch = bytecodePatch(
     name = "Hide ads",
 ) {
-    compatibleWith(AppCompatibilities.PIXIV_ADS)
+    compatibleWith(AppCompatibilities.PIXIV)
 
     execute {
         if (packageMetadata.versionName == "6.141.1") {

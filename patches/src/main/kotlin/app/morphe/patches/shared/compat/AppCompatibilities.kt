@@ -134,10 +134,6 @@ internal object AppCompatibilities {
         )
     )
 
-    // Both Pixiv patches support the same versions; kept as an alias so callers
-    // do not need to change (and to avoid duplicating the 6.196.0 target).
-    val PIXIV_ADS = PIXIV
-
     val CRICBUZZ = Compatibility(
         name = "Cricbuzz",
         packageName = "com.cricbuzz.android",
