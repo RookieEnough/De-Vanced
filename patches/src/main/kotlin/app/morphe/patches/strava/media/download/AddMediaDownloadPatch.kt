@@ -4,17 +4,16 @@
  */
 package app.morphe.patches.strava.media.download
 
-import app.morphe.patches.shared.compat.AppCompatibilities
 import app.morphe.patcher.extensions.InstructionExtensions.addInstruction
 import app.morphe.patcher.extensions.InstructionExtensions.addInstructions
 import app.morphe.patcher.extensions.InstructionExtensions.addInstructionsWithLabels
 import app.morphe.patcher.extensions.InstructionExtensions.getInstruction
 import app.morphe.patcher.extensions.InstructionExtensions.instructions
 import app.morphe.patcher.patch.bytecodePatch
+import app.morphe.patcher.resource.ResourceType
+import app.morphe.patcher.resource.resourceId
 import app.morphe.patcher.util.smali.ExternalLabel
-import app.morphe.patches.shared.misc.mapping.ResourceType
-import app.morphe.patches.shared.misc.mapping.getResourceId
-import app.morphe.patches.shared.misc.mapping.resourceMappingPatch
+import app.morphe.patches.shared.compat.AppCompatibilities
 import app.morphe.patches.strava.misc.extension.sharedExtensionPatch
 import app.morphe.util.getReference
 import app.morphe.util.writeRegister
@@ -35,7 +34,6 @@ val addMediaDownloadPatch = bytecodePatch(
     compatibleWith(AppCompatibilities.STRAVA)
 
     dependsOn(
-        resourceMappingPatch,
         sharedExtensionPatch
     )
 
@@ -57,9 +55,9 @@ val addMediaDownloadPatch = bytecodePatch(
                     new-instance v$actionRegister, $ACTION_CLASS_DESCRIPTOR
                     sget v${actionRegister + 1}, $MEDIA_DOWNLOAD_CLASS_DESCRIPTOR->$actionId:I
                     const v${actionRegister + 2}, 0x0
-                    const v${actionRegister + 3}, ${getResourceId(ResourceType.STRING, string)}
-                    const v${actionRegister + 4}, ${getResourceId(ResourceType.COLOR, color)}
-                    const v${actionRegister + 5}, ${getResourceId(ResourceType.DRAWABLE, drawable)}
+                    const v${actionRegister + 3}, ${resourceId(ResourceType.STRING, string)}
+                    const v${actionRegister + 4}, ${resourceId(ResourceType.COLOR, color)}
+                    const v${actionRegister + 5}, ${resourceId(ResourceType.DRAWABLE, drawable)}
                     move/from16 v${actionRegister + 6}, v${actionRegister + 4}
                     invoke-direct/range { v$actionRegister .. v${actionRegister + 7} }, $ACTION_CLASS_DESCRIPTOR-><init>(ILjava/lang/String;IIIILjava/io/Serializable;)V
                     invoke-virtual { v$actionRegistrarRegister, v$actionRegister }, Lcom/strava/bottomsheet/a;->a(Lcom/strava/bottomsheet/BottomSheetItem;)V

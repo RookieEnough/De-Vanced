@@ -7,7 +7,6 @@ package app.morphe.patches.strava.route.export
 import app.morphe.patcher.extensions.InstructionExtensions.addInstruction
 import app.morphe.patcher.patch.bytecodePatch
 import app.morphe.patches.shared.compat.AppCompatibilities
-import app.morphe.patches.shared.misc.mapping.resourceMappingPatch
 import app.morphe.patches.strava.misc.extension.sharedExtensionPatch
 import app.morphe.util.findMutableMethodOf
 import com.android.tools.smali.dexlib2.AccessFlags
@@ -22,7 +21,6 @@ val addRouteExportPatch = bytecodePatch(
     compatibleWith(AppCompatibilities.STRAVA)
 
     dependsOn(
-        resourceMappingPatch,
         sharedExtensionPatch
     )
 
