@@ -34,10 +34,12 @@ fun setOrGetFallbackPackageName(fallbackPackageName: String): String {
     }
 }
 
-val changePackageNamePatch = resourcePatch(
-    name = "Change package name",
-    description = "Appends \".morphe\" to the package name by default. " +
-        "Changing the package name of the app can lead to unexpected issues. This patch does not work with Reddit.",
+val cloneAppPatch = resourcePatch(
+    name = "Clone app",
+    description = "Changes the app package name to allow installing the same app multiple times. " +
+            "By default \".morphe\" is appended to the package name. Each cloned install must " +
+            "use a unique package name. Cloning does not work with all apps and using this patch " +
+            "may cause app crashes or other unexpected behavior.",
     default = false,
 ) {
     packageNameOption = stringOption(

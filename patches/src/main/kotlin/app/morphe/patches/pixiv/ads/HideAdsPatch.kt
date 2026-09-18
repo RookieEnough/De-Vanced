@@ -15,16 +15,17 @@ import app.morphe.util.returnEarly
 val hideAdsPatch = bytecodePatch(
     name = "Hide ads",
 ) {
-    compatibleWith(AppCompatibilities.PIXIV_ADS)
+    compatibleWith(AppCompatibilities.PIXIV)
 
     execute {
-        val method = if (packageMetadata.versionName == "6.141.1") {
-            ShouldShowAdsLegacyFingerprint.method
+        if (packageMetadata.versionName == "6.141.1") {
+            ShouldShowAdsLegacyFingerprint.method.returnEarly(false)
         } else {
-            ShouldShowAdsFingerprint.instructionMatches.first().getMethodCalled()
+            // Instruction matches follow the fingerprint filters one-to-one, so index 1
+            // is the app-level no-arg Z-returning call (the ads gate), resolved
+            // dynamically so no obfuscated names are hardcoded.
+            ShouldShowAdsFingerprint.instructionMatches[1].getMethodCalled().returnEarly(false)
         }
-
-        method.returnEarly(false)
     }
 }
 

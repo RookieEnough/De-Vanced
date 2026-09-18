@@ -12,7 +12,6 @@ import app.morphe.patcher.extensions.InstructionExtensions.getInstruction
 import app.morphe.patcher.patch.bytecodePatch
 import app.morphe.patcher.patch.resourcePatch
 import app.morphe.patches.shared.compat.AppCompatibilities
-import app.morphe.patches.shared.misc.mapping.resourceMappingPatch
 import app.morphe.patches.strava.misc.extension.sharedExtensionPatch
 import app.morphe.util.childElementsSequence
 import app.morphe.util.findElementByAttributeValueOrThrow
@@ -99,7 +98,6 @@ val addGiveGroupKudosButtonToGroupActivity = bytecodePatch(
 
     dependsOn(
         sharedExtensionPatch,
-        resourceMappingPatch,
         addGiveKudosButtonToLayoutPatch
     )
 
