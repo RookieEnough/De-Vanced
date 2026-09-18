@@ -20,8 +20,6 @@ import app.morphe.patches.all.misc.packagename.setOrGetFallbackPackageName
 import app.morphe.patches.shared.misc.gms.Constants.ACTIONS
 import app.morphe.patches.shared.misc.gms.Constants.AUTHORITIES
 import app.morphe.patches.shared.misc.gms.Constants.PERMISSIONS
-import app.morphe.patches.shared.misc.settings.preference.BasePreferenceScreen
-import app.morphe.patches.shared.misc.settings.preference.IntentPreference
 import app.morphe.util.asSequence
 import app.morphe.util.findMutableMethodOf
 import app.morphe.util.getReference
@@ -520,7 +518,6 @@ fun gmsCoreSupportResourcePatch(
     fromPackageName: String,
     toPackageName: String,
     spoofedPackageSignature: String,
-    screen: BasePreferenceScreen.Screen,
     appPermissionReplacements: MutableMap<String, String>,
     executeBlock: ResourcePatchContext.() -> Unit = {},
     block: ResourcePatchBuilder.() -> Unit = {},
@@ -637,15 +634,6 @@ fun gmsCoreSupportResourcePatch(
 
         patchManifest()
         addSpoofingMetadata()
-
-        screen.addPreferences(
-            IntentPreference(
-                "microg_settings",
-                intent = IntentPreference.Intent("", "org.microg.gms.ui.SettingsActivity") {
-                    "$GMS_CORE_VENDOR_GROUP_ID.android.gms"
-                }
-            )
-        )
 
         executeBlock()
     }
