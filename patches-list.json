@@ -1,6 +1,6 @@
 {
   "NOTE": "Do NOT manually edit this file. This file is automatically updated when semantic release (release.yml) runs. Manually editing this file can break your releases and break third party tools that use this file.",
-  "version": "1.4.3-dev.1",
+  "version": "1.4.3-dev.2",
   "patches": [
     {
       "name": "Add 'Give Kudos' button to 'Group Activity'",
@@ -8,7 +8,6 @@
       "default": true,
       "dependencies": [
         "BytecodePatch",
-        "ResourcePatch",
         "ResourcePatch"
       ],
       "compatiblePackages": [
@@ -65,7 +64,6 @@
       "description": "Extends the full-screen media viewer menu with items to copy or open their URLs or download them directly.",
       "default": true,
       "dependencies": [
-        "ResourcePatch",
         "BytecodePatch"
       ],
       "compatiblePackages": [
@@ -94,7 +92,6 @@
       "description": "Allows exporting and downloading Strava routes as GPX or TCX files directly from the app.",
       "default": true,
       "dependencies": [
-        "ResourcePatch",
         "BytecodePatch"
       ],
       "compatiblePackages": [
@@ -329,8 +326,8 @@
       "options": []
     },
     {
-      "name": "Change package name",
-      "description": "Appends \".morphe\" to the package name by default. Changing the package name of the app can lead to unexpected issues. This patch does not work with Reddit.",
+      "name": "Clone app",
+      "description": "Changes the app package name to allow installing the same app multiple times. By default \".morphe\" is appended to the package name. Each cloned install must use a unique package name. Cloning does not work with all apps and using this patch may cause app crashes or other unexpected behavior.",
       "default": false,
       "dependencies": [],
       "compatiblePackages": null,

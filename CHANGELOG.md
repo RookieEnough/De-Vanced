@@ -1,3 +1,9 @@
+## [1.4.3-dev.2](https://github.com/RookieEnough/De-Vanced/compare/v1.4.3-dev.1...v1.4.3-dev.2) (2026-09-18)
+
+### 🐛 Bug Fixes
+
+* Rename `Change package name` to `Clone app` ([912fc71](https://github.com/RookieEnough/De-Vanced/commit/912fc71b5e6bc734859a30e7f7a838677827fe47))
+
 ## [1.4.3-dev.1](https://github.com/RookieEnough/De-Vanced/compare/v1.4.2...v1.4.3-dev.1) (2026-09-17)
 
 ### 🐛 Bug Fixes
