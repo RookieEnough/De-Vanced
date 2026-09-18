@@ -20,7 +20,7 @@ internal val applicationOnCreateHook = ExtensionHook(
 
 val sharedExtensionPatch = sharedExtensionPatch(
     extensionName = "strava",
-    isYouTubeOrYouTubeMusic = false,
+    isGmsCorePatch = false,
     applicationOnCreateHook,
 )
 

@@ -1,6 +1,5 @@
 package app.morphe.extension.shared.patches;
 
-import static app.morphe.extension.shared.StringRef.str;
 import static app.morphe.extension.shared.requests.Route.Method.GET;
 
 import android.annotation.SuppressLint;
@@ -88,8 +87,8 @@ public class GmsCoreSupportPatch {
     }
 
     private static void showBatteryOptimizationDialog(Activity context,
-                                                      String dialogMessageRef,
-                                                      String positiveButtonTextRef,
+                                                      String dialogMessage,
+                                                      String positiveButtonText,
                                                       DialogInterface.OnClickListener onPositiveClickListener) {
         // Use a delay to allow the activity to finish initializing.
         // Otherwise, if device is in dark mode the dialog is shown with wrong color scheme.
@@ -97,10 +96,10 @@ public class GmsCoreSupportPatch {
             // Create the custom dialog.
             Pair<Dialog, LinearLayout> dialogPair = CustomDialog.create(
                     context,
-                    str("gms_core_dialog_title"), // Title.
-                    str(dialogMessageRef), // Message.
+                    "Action needed", // Title.
+                    dialogMessage, // Message.
                     null, // No EditText.
-                    str(positiveButtonTextRef), // OK button text.
+                    positiveButtonText, // OK button text.
                     () -> onPositiveClickListener.onClick(null, 0), // Convert DialogInterface.OnClickListener to Runnable.
                     null, // No Cancel button action.
                     null, // No Neutral button text.
@@ -147,7 +146,7 @@ public class GmsCoreSupportPatch {
                 Logger.printInfo(() -> "GmsCore was not found");
                 // Cannot show a dialog and must show a toast,
                 // because on some installations the app crashes before a dialog can be displayed.
-                Utils.showToastLong(str("gms_core_toast_not_installed_message"));
+                Utils.showToastLong("MicroG is not installed. Install it.");
                 open(getGmsCoreDownload());
                 return;
             }
@@ -169,8 +168,10 @@ public class GmsCoreSupportPatch {
                 Logger.printInfo(() -> "GmsCore is not whitelisted from battery optimizations");
 
                 showBatteryOptimizationDialog(context,
-                        "gms_core_dialog_not_whitelisted_using_battery_optimizations_message",
-                        "gms_core_dialog_continue_text",
+                        "MicroG battery optimizations must be disabled to prevent issues.\n\n"
+                                + "Disabling battery optimizations for MicroG will not negatively affect battery usage.\n\n"
+                                + "Tap the continue button and allow optimization changes.",
+                        "Continue",
                         (dialog, id) -> openGmsCoreDisableBatteryOptimizationsIntent(context));
                 return;
             }
@@ -184,8 +185,10 @@ public class GmsCoreSupportPatch {
                     checkIfDontKillMyAppSupportsManufacturer();
 
                     showBatteryOptimizationDialog(context,
-                            "gms_core_dialog_not_whitelisted_not_allowed_in_background_message",
-                            "gms_core_dialog_open_website_text",
+                            "MicroG does not have permission to run in the background.\n\n"
+                                    + "Follow the \"Don't kill my app\" guide for your phone, and apply the instructions to your MicroG installation.\n\n"
+                                    + "This is required for the app to work.",
+                            "Open website",
                             (dialog, id) -> openDontKillMyApp());
                 }
             } finally {

@@ -38,7 +38,7 @@ internal val applicationInitHook: ExtensionHook = ApplicationInitHook()
 
 val sharedExtensionPatch = sharedExtensionPatch(
     extensionName = "cricbuzz",
-    isYouTubeOrYouTubeMusic = false,
+    isGmsCorePatch = false,
     applicationInitHook,
 )
 

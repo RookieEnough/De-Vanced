@@ -20,6 +20,6 @@ internal val messengerApplicationOnCreateHook = ExtensionHook(
 
 val sharedExtensionPatch = sharedExtensionPatch(
     extensionName = "messenger",
-    isYouTubeOrYouTubeMusic = false,
+    isGmsCorePatch = false,
     messengerApplicationOnCreateHook,
 )
