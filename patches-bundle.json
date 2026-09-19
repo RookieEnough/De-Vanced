@@ -1,7 +1,7 @@
 {
-  "created_at": "2026-09-15T11:44:36",
-  "description": "## [1.4.2](https://github.com/RookieEnough/De-Vanced/compare/v1.4.1...v1.4.2) (2026-09-15)\n\n### 🐛 Bug Fixes\n\n* **Pixiv:** Update compatibility declaration ([f05037e](https://github.com/RookieEnough/De-Vanced/commit/f05037e17f1c0b57fdf1a08f51855a0afcb3a982))",
-  "download_url": "https://github.com/RookieEnough/De-Vanced/releases/download/v1.4.2/patches-1.4.2.mpp",
+  "created_at": "2026-09-18T13:01:15",
+  "description": "## [1.4.3-dev.2](https://github.com/RookieEnough/De-Vanced/compare/v1.4.3-dev.1...v1.4.3-dev.2) (2026-09-18)\n\n### 🐛 Bug Fixes\n\n* Rename `Change package name` to `Clone app` ([912fc71](https://github.com/RookieEnough/De-Vanced/commit/912fc71b5e6bc734859a30e7f7a838677827fe47))",
+  "download_url": "https://github.com/RookieEnough/De-Vanced/releases/download/v1.4.3-dev.2/patches-1.4.3-dev.2.mpp",
   "signature_download_url": "",
-  "version": "1.4.2"
+  "version": "1.4.3-dev.2"
 }

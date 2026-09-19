@@ -19,7 +19,7 @@ private val applicationOnCreateHook = ExtensionHook(
 
 val sharedExtensionPatch = sharedExtensionPatch(
     extensionName = "nothingx",
-    isYouTubeOrYouTubeMusic = false,
+    isGmsCorePatch = false,
     applicationOnCreateHook,
 )
 

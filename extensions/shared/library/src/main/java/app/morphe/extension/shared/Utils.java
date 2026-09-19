@@ -20,10 +20,8 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
-import android.preference.Preference;
 import android.preference.PreferenceGroup;
 import android.preference.PreferenceScreen;
-import android.util.Pair;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
@@ -41,10 +39,7 @@ import java.lang.ref.WeakReference;
 import java.text.Bidi;
 import java.text.Collator;
 import java.text.Normalizer;
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.LinkedHashMap;
-import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Objects;
@@ -58,7 +53,6 @@ import java.util.regex.Pattern;
 import app.morphe.extension.shared.settings.AppLanguage;
 import app.morphe.extension.shared.settings.BaseSettings;
 import app.morphe.extension.shared.settings.BooleanSetting;
-import app.morphe.extension.shared.settings.preference.MorpheAboutPreference;
 import app.morphe.extension.shared.ui.Dim;
 
 @SuppressWarnings("NewApi")
@@ -1011,106 +1005,6 @@ public class Utils {
         }
 
         return cachedCollator;
-    }
-
-    /**
-     * Sorts a {@link PreferenceGroup} and all nested subgroups by title or key.
-     * <p>
-     * The sort order is controlled by the {@link Sort} suffix present in the preference key.
-     * Preferences without a key or without a {@link Sort} suffix remain in their original order.
-     * <p>
-     * Sorting is performed using {@link Collator} with the current user locale,
-     * ensuring correct alphabetical ordering for all supported languages
-     * (e.g., Ukrainian "і", German "ß", French accented characters, etc.).
-     *
-     * @param group the {@link PreferenceGroup} to sort
-     */
-    @SuppressWarnings("deprecation")
-    public static void sortPreferenceGroups(PreferenceGroup group) {
-        Sort groupSort = Sort.fromKey(group.getKey(), Sort.UNSORTED);
-        List<Pair<String, Preference>> preferences = new ArrayList<>();
-
-        // Get cached Collator for locale-aware string comparison.
-        Collator collator = getCollator();
-
-        for (int i = 0, prefCount = group.getPreferenceCount(); i < prefCount; i++) {
-            Preference preference = group.getPreference(i);
-
-            final Sort preferenceSort;
-            if (preference instanceof PreferenceGroup subGroup) {
-                sortPreferenceGroups(subGroup);
-                preferenceSort = groupSort; // Sort value for groups is for it's content, not itself.
-            } else {
-                // Allow individual preferences to set a key sorting.
-                // Used to force a preference to the top or bottom of a group.
-                preferenceSort = Sort.fromKey(preference.getKey(), groupSort);
-            }
-
-            final String sortValue;
-            switch (preferenceSort) {
-                case BY_TITLE:
-                    sortValue = removePunctuationToLowercase(preference.getTitle());
-                    break;
-                case BY_KEY:
-                    sortValue = preference.getKey();
-                    break;
-                case UNSORTED:
-                    continue; // Keep original sorting.
-                default:
-                    throw new IllegalStateException();
-            }
-
-            preferences.add(new Pair<>(sortValue, preference));
-        }
-
-        // Sort the list using locale-specific collation rules.
-        Collections.sort(preferences, (pair1, pair2)
-                -> collator.compare(pair1.first, pair2.first));
-
-        // Reassign order values to reflect the new sorted sequence
-        int index = 0;
-        for (Pair<String, Preference> pair : preferences) {
-            int order = index++;
-            Preference pref = pair.second;
-
-            // Move any screens, intents, and the one off About preference to the top.
-            if (pref instanceof PreferenceScreen || pref instanceof MorpheAboutPreference
-                    || pref.getIntent() != null) {
-                // Any arbitrary large number.
-                order -= 1000;
-            }
-
-            pref.setOrder(order);
-        }
-    }
-
-    /**
-     * Set all preferences to multiline titles if the device is not using an English variant.
-     * The English strings are heavily scrutinized and all titles fit on screen
-     * except 2 or 3 preference strings and those do not affect readability.
-     * <p>
-     * Allowing multiline for those 2 or 3 English preferences looks weird and out of place,
-     * and visually it looks better to clip the text and keep all titles 1 line.
-     */
-    @SuppressWarnings("deprecation")
-    public static void setPreferenceTitlesToMultiLineIfNeeded(PreferenceGroup group) {
-        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.O) {
-            return;
-        }
-
-        String morpheLocale = Utils.getContext().getResources().getConfiguration().locale.getLanguage();
-        if (morpheLocale.equals(Locale.ENGLISH.getLanguage())) {
-            return;
-        }
-
-        for (int i = 0, prefCount = group.getPreferenceCount(); i < prefCount; i++) {
-            Preference pref = group.getPreference(i);
-            pref.setSingleLineTitle(false);
-
-            if (pref instanceof PreferenceGroup subGroup) {
-                setPreferenceTitlesToMultiLineIfNeeded(subGroup);
-            }
-        }
     }
 
     /**

@@ -5,8 +5,8 @@
 package app.morphe.patches.strava.groupkudos
 
 import app.morphe.patcher.Fingerprint
-import app.morphe.patches.shared.misc.mapping.ResourceType
-import app.morphe.patches.shared.misc.mapping.resourceLiteral
+import app.morphe.patcher.resource.ResourceType
+import app.morphe.patcher.resourceLiteral
 
 internal object InitFingerprint : Fingerprint(
     name = "<init>",

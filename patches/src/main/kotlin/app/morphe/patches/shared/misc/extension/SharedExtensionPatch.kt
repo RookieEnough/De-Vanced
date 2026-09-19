@@ -19,14 +19,13 @@ internal const val EXTENSION_CLASS_DESCRIPTOR = "Lapp/morphe/extension/shared/Ut
  * A patch to extend with an extension shared with multiple patches.
  *
  * @param extensionName The name of the extension to extend with.
- * @param isYouTubeOrYouTubeMusic Whether the patch targets YouTube and YouTube Music.
  */
 fun sharedExtensionPatch(
     extensionName: String,
-    isYouTubeOrYouTubeMusic: Boolean,
+    isGmsCorePatch: Boolean,
     vararg hooks: ExtensionHook,
 ) = bytecodePatch {
-    dependsOn(sharedExtensionPatch(isYouTubeOrYouTubeMusic, *hooks))
+    dependsOn(sharedExtensionPatch(isGmsCorePatch, *hooks))
 
     extendWith("extensions/$extensionName.mpe")
 }
@@ -38,10 +37,10 @@ fun sharedExtensionPatch(
  * commonly for the onCreate method of exported activities.
  */
 fun sharedExtensionPatch(
-    isYouTubeOrYouTubeMusic: Boolean,
+    isGmsCorePatch: Boolean,
     vararg hooks: ExtensionHook,
 ) = bytecodePatch {
-    val extensionName = if (isYouTubeOrYouTubeMusic) "shared-youtube" else "shared"
+    val extensionName = if (isGmsCorePatch) "shared-gmscore" else "shared"
     extendWith("extensions/$extensionName.mpe")
 
     execute {

@@ -1,5 +1,5 @@
 [versions]
-morphe-patcher = "1.10.0"
+morphe-patcher = "1.14.0"
 smali = "d92701d947"
 annotation = "1.10.0"
 gson = "2.14.0"

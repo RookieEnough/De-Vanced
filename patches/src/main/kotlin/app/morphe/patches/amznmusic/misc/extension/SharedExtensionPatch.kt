@@ -26,7 +26,7 @@ private val applicationInitHook = ExtensionHook(
 
 val sharedExtensionPatch = sharedExtensionPatch(
     extensionName = "amznmusic",
-    isYouTubeOrYouTubeMusic = false,
+    isGmsCorePatch = false,
     applicationInitHook,
 )
 
