@@ -90,7 +90,6 @@ The following apps have been removed from this repo because they are now activel
 
 - **TikTok**: Maintained by [icysymmetra](https://github.com/icysymmetra/tiktok-patches-for-morphe)
 - **Disney+**: Maintained by [ajstrick81](https://github.com/ajstrick81/morphe-androidtv-patches)
-- **Peacock TV**: Maintained by [ajstrick81](https://github.com/ajstrick81/morphe-androidtv-patches)
 - **Google News**: Maintained by [Hoo-dles](https://github.com/hoo-dles/morphe-patches) and [docbt](https://github.com/docbt/patched-up)
 - **Inshorts**: Maintained by [BholeyKaBhakt](https://github.com/BholeyKaBhakt/android-patches-xtra)
 - **Proton Mail**: Maintained by [hxreborn](https://github.com/hxreborn/morphe-patches)

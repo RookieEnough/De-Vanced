@@ -66,6 +66,15 @@ internal object AppCompatibilities {
         appIconColor = 0x000000,
     )
 
+    val PEACOCK_TV = Compatibility(
+        name = "Peacock TV",
+        packageName = "com.peacocktv.peacockandroid",
+        appIconColor = 0x000000,
+        targets = listOf(
+            AppTarget("7.9.21")
+        )
+    )
+
     val NU_NL = Compatibility(
         name = "NU.nl",
         packageName = "nl.sanomamedia.android.nu",
