@@ -1,3 +1,9 @@
+## [1.4.4](https://github.com/RookieEnough/De-Vanced/compare/v1.4.3...v1.4.4) (2026-09-20)
+
+### 🐛 Bug Fixes
+
+* **Peacock TV:** Restore `Hide ads` patch ([dbd5846](https://github.com/RookieEnough/De-Vanced/commit/dbd584672223ca2d9248657c6069de631f6b2f04))
+
 ## [1.4.4-dev.1](https://github.com/RookieEnough/De-Vanced/compare/v1.4.3...v1.4.4-dev.1) (2026-09-20)
 
 ### 🐛 Bug Fixes
