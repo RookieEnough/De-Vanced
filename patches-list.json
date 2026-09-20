@@ -1,6 +1,6 @@
 {
   "NOTE": "Do NOT manually edit this file. This file is automatically updated when semantic release (release.yml) runs. Manually editing this file can break your releases and break third party tools that use this file.",
-  "version": "1.4.3",
+  "version": "1.4.4-dev.1",
   "patches": [
     {
       "name": "Add 'Give Kudos' button to 'Group Activity'",
@@ -894,6 +894,32 @@
           "description": null,
           "apkFileType": null,
           "appIconColor": "#E2001A",
+          "signatures": null,
+          "targets": [
+            {
+              "version": null,
+              "versionCodes": null,
+              "isExperimental": false,
+              "minSdk": null,
+              "description": null
+            }
+          ]
+        }
+      ],
+      "options": []
+    },
+    {
+      "name": "Hide ads",
+      "description": "Hides all video ads.",
+      "default": true,
+      "dependencies": [],
+      "compatiblePackages": [
+        {
+          "packageName": "com.peacocktv.peacockandroid",
+          "name": "Peacock TV",
+          "description": null,
+          "apkFileType": null,
+          "appIconColor": "#000000",
           "signatures": null,
           "targets": [
             {
