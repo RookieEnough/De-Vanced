@@ -1,3 +1,9 @@
+## [1.6.0](https://github.com/RookieEnough/De-Vanced/compare/v1.5.1...v1.6.0) (2026-10-24)
+
+### ✨ New Features
+
+* Restore Disney+ patches ([1c2e6a9](https://github.com/RookieEnough/De-Vanced/commit/1c2e6a9e8cd73bbe9587e46707b2c22605b1b358))
+
 ## [1.5.1](https://github.com/RookieEnough/De-Vanced/compare/v1.5.0...v1.5.1) (2026-10-04)
 
 ### 🐛 Bug Fixes

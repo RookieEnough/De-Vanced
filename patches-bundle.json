@@ -1,7 +1,7 @@
 {
-  "created_at": "2026-10-04T10:19:43",
-  "description": "## [1.5.1](https://github.com/RookieEnough/De-Vanced/compare/v1.5.0...v1.5.1) (2026-10-04)\n\n### 🐛 Bug Fixes\n\n* **Amazon Music:** Resolve app crash on startup ([114c5fc](https://github.com/RookieEnough/De-Vanced/commit/114c5fca44d634bf01f23bd58aac63eccd9120dd))",
-  "download_url": "https://github.com/RookieEnough/De-Vanced/releases/download/v1.5.1/patches-1.5.1.mpp",
+  "created_at": "2026-10-24T08:51:58",
+  "description": "## [1.6.0](https://github.com/RookieEnough/De-Vanced/compare/v1.5.1...v1.6.0) (2026-10-24)\n\n### ✨ New Features\n\n* Restore Disney+ patches ([1c2e6a9](https://github.com/RookieEnough/De-Vanced/commit/1c2e6a9e8cd73bbe9587e46707b2c22605b1b358))",
+  "download_url": "https://github.com/RookieEnough/De-Vanced/releases/download/v1.6.0/patches-1.6.0.mpp",
   "signature_download_url": "",
-  "version": "1.5.1"
+  "version": "1.6.0"
 }

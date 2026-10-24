@@ -1,6 +1,6 @@
 {
   "NOTE": "Do NOT manually edit this file. This file is automatically updated when semantic release (release.yml) runs. Manually editing this file can break your releases and break third party tools that use this file.",
-  "version": "1.5.1",
+  "version": "1.6.0",
   "patches": [
     {
       "name": "AMOLED dark theme",
@@ -2068,6 +2068,32 @@
           "description": null,
           "apkFileType": null,
           "appIconColor": "#FF9900",
+          "signatures": null,
+          "targets": [
+            {
+              "version": null,
+              "versionCodes": null,
+              "isExperimental": false,
+              "minSdk": null,
+              "description": null
+            }
+          ]
+        }
+      ],
+      "options": []
+    },
+    {
+      "name": "Skip ads",
+      "description": "Automatically skips ads.",
+      "default": true,
+      "dependencies": [],
+      "compatiblePackages": [
+        {
+          "packageName": "com.disney.disneyplus",
+          "name": "Disney+",
+          "description": null,
+          "apkFileType": null,
+          "appIconColor": "#09A9B8",
           "signatures": null,
           "targets": [
             {
