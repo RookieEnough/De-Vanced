@@ -150,6 +150,12 @@ internal object AppCompatibilities {
         targets = listOf(AppTarget("6.24.01")),
     )
 
+    val DISNEY_PLUS = Compatibility(
+        name = "Disney+",
+        packageName = "com.disney.disneyplus",
+        appIconColor = 0x09A9B8,
+    )
+
     val MICROSOFT_LENS = Compatibility(
         name = "Microsoft Lens",
         packageName = "com.microsoft.office.officelens",

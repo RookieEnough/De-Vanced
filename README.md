@@ -17,7 +17,7 @@
 [![Kotlin](https://img.shields.io/badge/Kotlin-1.9+-7F52FF?style=flat-square&logo=kotlin)](https://kotlinlang.org)
 [![Android](https://img.shields.io/badge/Platform-Android-3DDC84?style=flat-square&logo=android)](https://android.com)
 [![Gradle](https://img.shields.io/badge/Gradle-8.x-02303A?style=flat-square&logo=gradle)](https://gradle.org)
-[![Patches](https://img.shields.io/badge/Patches-22%20Apps-success?style=flat-square)](#supported-apps--patches)
+[![Patches](https://img.shields.io/badge/Patches-25%20Apps-success?style=flat-square)](#supported-apps--patches)
 
 </div>
 
@@ -60,10 +60,12 @@
 | App | Package | Patches |
 | :--- | :--- | :--- |
 | Adobe Photoshop Mix | `com.adobe.photoshopmix` | <ul><li>Bypass login</li></ul> |
+| Amazon Music | `com.amazon.mp3` | <ul><li>Prevent log upload</li><li>Skip ads</li><li>Unlimited skips</li><li>Unlock Unlimited</li></ul> |
 | Amazon Shopping | `com.amazon.mShop.android.shopping` | <ul><li>Always allow deep-linking</li></ul> |
 | Angulus | `com.drinkplusplus.angulus` | <ul><li>Hide Ads</li></ul> |
 | Bandcamp | `com.bandcamp.android` | <ul><li>Remove play limits</li></ul> |
 | Cricbuzz | `com.cricbuzz.android` | <ul><li>Disable ads</li><li>Extension</li></ul> |
+| Disney+ | `com.disney.disneyplus` | <ul><li>Skip ads</li></ul> |
 | Facebook | `com.facebook.katana` | <ul><li>AMOLED dark theme</li><li>Clean Home feed</li><li>De-Vanced Settings</li><li>Disable all ads</li><li>Disable analytics and telemetry</li><li>Disable auto refresh</li><li>Download Media</li><li>Facebook signature compatibility</li><li>Material You theme</li><li>Media quality controls</li><li>Messenger install compatibility</li><li>Open Marketplace on launch</li><li>Optimize Facebook</li><li>Picture-in-picture</li><li>Reels 2x speed</li></ul> |
 | GMX Mail | `de.gmx.mobile.android.mail` | <ul><li>Hide Ads</li><li>Force enable FreePhone</li><li>Hide upgrade button</li></ul> |
 | Google Photos | `com.google.android.apps.photos` | <ul><li>Spoof features</li><li>Backup control</li><li>GMS support</li><li>Extension</li><li>Restore backup toggle</li></ul> |
@@ -76,6 +78,7 @@
 | Microsoft Lens | `com.microsoft.office.officelens` | <ul><li>Hide OneDrive migration</li></ul> |
 | Nothing X | `com.nothing.smartcenter` | <ul><li>Hide Ads</li></ul> |
 | NU.nl | `nl.sanomamedia.android.nu` | <ul><li>Hide Ads</li></ul> |
+| Peacock TV | `com.peacocktv.peacockandroid` | <ul><li>Hide Ads</li></ul> |
 | Photomath | `com.microblink.photomath` | <ul><li>Spoof device ID</li><li>Signature detection</li><li>Unlock Plus</li><li>Bookpoint</li><li>Hide update popup</li></ul> |
 | Pixiv | `jp.pxv.android` | <ul><li>Hide ads</li><li>Remove popular search time limit</li></ul> |
 | Strava | `com.strava` | <ul><li>Group kudos</li><li>Hide distractions</li><li>Media download</li><li>Media upload</li><li>Disable quick edit</li><li>Password login</li><li>Block tracking</li><li>Unlock subscription</li><li>Disable upsell</li></ul> |
@@ -89,7 +92,6 @@
 The following apps have been removed from this repo because they are now actively maintained by other community repositories:
 
 - **TikTok**: Maintained by [icysymmetra](https://github.com/icysymmetra/tiktok-patches-for-morphe)
-- **Disney+**: Maintained by [ajstrick81](https://github.com/ajstrick81/morphe-androidtv-patches)
 - **Google News**: Maintained by [Hoo-dles](https://github.com/hoo-dles/morphe-patches) and [docbt](https://github.com/docbt/patched-up)
 - **Inshorts**: Maintained by [BholeyKaBhakt](https://github.com/BholeyKaBhakt/android-patches-xtra)
 - **Proton Mail**: Maintained by [hxreborn](https://github.com/hxreborn/morphe-patches)
