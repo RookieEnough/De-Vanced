@@ -1,27 +1,32 @@
 /*
  * Forked from:
  * https://gitlab.com/ReVanced/revanced-patches/-/blob/main/patches/src/main/kotlin/app/revanced/patches/shared/compat/AppCompatibilities.kt
- *
- * Central Morphe `Compatibility` metadata so Morphe Manager shows human-readable app names.
  */
 package app.morphe.patches.shared.compat
 
+import app.morphe.patcher.patch.ApkFileType
 import app.morphe.patcher.patch.AppTarget
 import app.morphe.patcher.patch.Compatibility
 import app.morphe.patcher.patch.SupportedAbi
 
 @Suppress("MemberVisibilityCanBePrivate")
 internal object AppCompatibilities {
+
     val AMAZON_MUSIC = Compatibility(
         name = "Amazon Music",
         packageName = "com.amazon.mp3",
         appIconColor = 0xFF9900,
+        apkFileType = ApkFileType.APKM,
+        targets = listOf(
+            AppTarget("2.36.1")
+        )
     )
 
     val AMAZON_SHOPPING = Compatibility(
         name = "Amazon Shopping",
         packageName = "com.amazon.mShop.android.shopping",
         appIconColor = 0xFF9900,
+        apkFileType = ApkFileType.APKM,
     )
 
     val ANGULUS = Compatibility(
@@ -85,21 +90,6 @@ internal object AppCompatibilities {
         name = "Photoshop Mix",
         packageName = "com.adobe.photoshopmix",
         appIconColor = 0x31A8FF,
-    )
-
-    val FACEBOOK = Compatibility(
-        name = "Facebook",
-        packageName = "com.facebook.katana",
-        appIconColor = 0x0866FF,
-        targets = listOf(
-            AppTarget(
-                version = "490.0.0.63.82",
-                versionCodes = mapOf(
-                    SupportedAbi.ARMEABI_V7A to 457019986,
-                    SupportedAbi.ARM64_V8A to 457019914
-                )
-            )
-        )
     )
 
     val MESSENGER = Compatibility(
@@ -190,12 +180,6 @@ internal object AppCompatibilities {
     )
 
     val VIBER = Compatibility(
-        name = "Viber",
-        packageName = "com.viber.voip",
-        appIconColor = 0x7360F2,
-    )
-
-    val VIBER_VERSIONED = Compatibility(
         name = "Viber",
         packageName = "com.viber.voip",
         appIconColor = 0x7360F2,

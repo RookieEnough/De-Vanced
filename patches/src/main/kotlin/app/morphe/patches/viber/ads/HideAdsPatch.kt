@@ -19,7 +19,7 @@ val hideAdsPatch = bytecodePatch(
     name = "Hide Ads",
     description = "Hides ad banners between chats.",
 ) {
-    compatibleWith(AppCompatibilities.VIBER_VERSIONED)
+    compatibleWith(AppCompatibilities.VIBER)
 
     execute {
         val methodMatch = FindAdStringMethodFingerprint
