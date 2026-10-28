@@ -1,3 +1,9 @@
+## [1.6.1](https://github.com/RookieEnough/De-Vanced/compare/v1.6.0...v1.6.1) (2026-10-28)
+
+### 🐛 Bug Fixes
+
+* **Amazon Music:** Add version constrain of last release known to work ([6419abc](https://github.com/RookieEnough/De-Vanced/commit/6419abcff86265e5872f155e5e1821baad55ca86))
+
 ## [1.6.0](https://github.com/RookieEnough/De-Vanced/compare/v1.5.1...v1.6.0) (2026-10-24)
 
 ### ✨ New Features

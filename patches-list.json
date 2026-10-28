@@ -1,6 +1,6 @@
 {
   "NOTE": "Do NOT manually edit this file. This file is automatically updated when semantic release (release.yml) runs. Manually editing this file can break your releases and break third party tools that use this file.",
-  "version": "1.6.0",
+  "version": "1.6.1",
   "patches": [
     {
       "name": "AMOLED dark theme",
@@ -159,7 +159,7 @@
           "packageName": "com.amazon.mShop.android.shopping",
           "name": "Amazon Shopping",
           "description": null,
-          "apkFileType": null,
+          "apkFileType": "APKM",
           "appIconColor": "#FF9900",
           "signatures": null,
           "targets": [
@@ -1409,7 +1409,14 @@
           "signatures": null,
           "targets": [
             {
-              "version": null,
+              "version": "25.9.2.0",
+              "versionCodes": null,
+              "isExperimental": false,
+              "minSdk": null,
+              "description": null
+            },
+            {
+              "version": "26.1.2.0",
               "versionCodes": null,
               "isExperimental": false,
               "minSdk": null,
@@ -1776,12 +1783,12 @@
           "packageName": "com.amazon.mp3",
           "name": "Amazon Music",
           "description": null,
-          "apkFileType": null,
+          "apkFileType": "APKM",
           "appIconColor": "#FF9900",
           "signatures": null,
           "targets": [
             {
-              "version": null,
+              "version": "2.36.1",
               "versionCodes": null,
               "isExperimental": false,
               "minSdk": null,
@@ -1977,12 +1984,12 @@
           "packageName": "com.amazon.mp3",
           "name": "Amazon Music",
           "description": null,
-          "apkFileType": null,
+          "apkFileType": "APKM",
           "appIconColor": "#FF9900",
           "signatures": null,
           "targets": [
             {
-              "version": null,
+              "version": "2.36.1",
               "versionCodes": null,
               "isExperimental": false,
               "minSdk": null,
@@ -2066,12 +2073,12 @@
           "packageName": "com.amazon.mp3",
           "name": "Amazon Music",
           "description": null,
-          "apkFileType": null,
+          "apkFileType": "APKM",
           "appIconColor": "#FF9900",
           "signatures": null,
           "targets": [
             {
-              "version": null,
+              "version": "2.36.1",
               "versionCodes": null,
               "isExperimental": false,
               "minSdk": null,
@@ -2292,12 +2299,12 @@
           "packageName": "com.amazon.mp3",
           "name": "Amazon Music",
           "description": null,
-          "apkFileType": null,
+          "apkFileType": "APKM",
           "appIconColor": "#FF9900",
           "signatures": null,
           "targets": [
             {
-              "version": null,
+              "version": "2.36.1",
               "versionCodes": null,
               "isExperimental": false,
               "minSdk": null,
@@ -2320,12 +2327,12 @@
           "packageName": "com.amazon.mp3",
           "name": "Amazon Music",
           "description": null,
-          "apkFileType": null,
+          "apkFileType": "APKM",
           "appIconColor": "#FF9900",
           "signatures": null,
           "targets": [
             {
-              "version": null,
+              "version": "2.36.1",
               "versionCodes": null,
               "isExperimental": false,
               "minSdk": null,
