@@ -1,6 +1,6 @@
 {
   "NOTE": "Do NOT manually edit this file. This file is automatically updated when semantic release (release.yml) runs. Manually editing this file can break your releases and break third party tools that use this file.",
-  "version": "1.6.2",
+  "version": "1.6.3-dev.1",
   "patches": [
     {
       "name": "AMOLED dark theme",
@@ -1209,6 +1209,13 @@
               "isExperimental": false,
               "minSdk": null,
               "description": null
+            },
+            {
+              "version": "6.202.1",
+              "versionCodes": null,
+              "isExperimental": false,
+              "minSdk": null,
+              "description": null
             }
           ]
         }
@@ -1964,6 +1971,13 @@
             },
             {
               "version": "6.196.0",
+              "versionCodes": null,
+              "isExperimental": false,
+              "minSdk": null,
+              "description": null
+            },
+            {
+              "version": "6.202.1",
               "versionCodes": null,
               "isExperimental": false,
               "minSdk": null,

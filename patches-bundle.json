@@ -1,7 +1,7 @@
 {
-  "created_at": "2026-10-29T08:28:00",
-  "description": "## [1.6.2](https://github.com/RookieEnough/De-Vanced/compare/v1.6.1...v1.6.2) (2026-10-29)\n\n### 🐛 Bug Fixes\n\n* **Amazon Music:** Use correct version constrain ([3bb19eb](https://github.com/RookieEnough/De-Vanced/commit/3bb19eb04645d315d8e5df7f2eb0d4194d2810eb))",
-  "download_url": "https://github.com/RookieEnough/De-Vanced/releases/download/v1.6.2/patches-1.6.2.mpp",
+  "created_at": "2026-10-31T23:54:20",
+  "description": "## [1.6.3-dev.1](https://github.com/RookieEnough/De-Vanced/compare/v1.6.2...v1.6.3-dev.1) (2026-10-31)\n\n### 🐛 Bug Fixes\n\n* **Pixiv:** support 6.202.1 ([#171](https://github.com/RookieEnough/De-Vanced/issues/171)) ([33daeac](https://github.com/RookieEnough/De-Vanced/commit/33daeacd6872ee76c5d9a1aca235d3900e958d13))",
+  "download_url": "https://github.com/RookieEnough/De-Vanced/releases/download/v1.6.3-dev.1/patches-1.6.3-dev.1.mpp",
   "signature_download_url": "",
-  "version": "1.6.2"
+  "version": "1.6.3-dev.1"
 }

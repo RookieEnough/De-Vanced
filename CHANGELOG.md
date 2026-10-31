@@ -1,3 +1,9 @@
+## [1.6.3-dev.1](https://github.com/RookieEnough/De-Vanced/compare/v1.6.2...v1.6.3-dev.1) (2026-10-31)
+
+### 🐛 Bug Fixes
+
+* **Pixiv:** support 6.202.1 ([#171](https://github.com/RookieEnough/De-Vanced/issues/171)) ([33daeac](https://github.com/RookieEnough/De-Vanced/commit/33daeacd6872ee76c5d9a1aca235d3900e958d13))
+
 ## [1.6.2](https://github.com/RookieEnough/De-Vanced/compare/v1.6.1...v1.6.2) (2026-10-29)
 
 ### 🐛 Bug Fixes
