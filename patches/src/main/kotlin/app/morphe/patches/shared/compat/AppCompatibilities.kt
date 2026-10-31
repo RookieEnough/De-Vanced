@@ -130,6 +130,7 @@ internal object AppCompatibilities {
         targets = listOf(
             AppTarget("6.141.1"),
             AppTarget("6.196.0"),
+            AppTarget("6.202.1"),
         )
     )
 
