@@ -1,3 +1,11 @@
+## [1.6.3](https://github.com/RookieEnough/De-Vanced/compare/v1.6.2...v1.6.3) (2026-11-02)
+
+### 🐛 Bug Fixes
+
+* **Microsoft Lens:** Prevent native JVM invalidation ([#174](https://github.com/RookieEnough/De-Vanced/issues/174)) ([bcfbd3c](https://github.com/RookieEnough/De-Vanced/commit/bcfbd3cd20b43233c8a6ef0b4c5da7951a0e7d1e))
+* **Pixiv:** support 6.202.1 ([#171](https://github.com/RookieEnough/De-Vanced/issues/171)) ([33daeac](https://github.com/RookieEnough/De-Vanced/commit/33daeacd6872ee76c5d9a1aca235d3900e958d13))
+* Remove old Twitch patches that are now available at multiple other sources ([8d1cbbb](https://github.com/RookieEnough/De-Vanced/commit/8d1cbbb6f10eefabd62a6e91af3a7e17fdb14dd0))
+
 ## [1.6.3-dev.3](https://github.com/RookieEnough/De-Vanced/compare/v1.6.3-dev.2...v1.6.3-dev.3) (2026-11-02)
 
 ### 🐛 Bug Fixes
