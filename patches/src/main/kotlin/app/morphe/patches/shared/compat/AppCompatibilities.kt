@@ -151,6 +151,7 @@ internal object AppCompatibilities {
         name = "Microsoft Lens",
         packageName = "com.microsoft.office.officelens",
         appIconColor = 0xD73E01,
+        targets = listOf(AppTarget("16.0.19628.20008")),
     )
 
     val PHOTOMATH = Compatibility(
