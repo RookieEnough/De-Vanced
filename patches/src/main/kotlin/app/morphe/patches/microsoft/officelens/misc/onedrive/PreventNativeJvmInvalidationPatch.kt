@@ -1,7 +1,6 @@
 package app.morphe.patches.microsoft.officelens.misc.onedrive
 
-import app.morphe.patcher.patch.AppTarget
-import app.morphe.patcher.patch.Compatibility
+import app.morphe.patches.shared.compat.AppCompatibilities
 import app.morphe.patcher.patch.resourcePatch
 import java.io.RandomAccessFile
 
@@ -39,14 +38,7 @@ val preventNativeJvmInvalidationPatch = resourcePatch(
     description = "Prevents Microsoft Lens's native signature check from clearing the " +
         "JavaVM pointer and causing delayed crashes after the APK is re-signed.",
 ) {
-    compatibleWith(
-        Compatibility(
-            name = "Microsoft Lens",
-            packageName = "com.microsoft.office.officelens",
-            appIconColor = 0xD73E01,
-            targets = listOf(AppTarget("16.0.19628.20008")),
-        ),
-    )
+    compatibleWith(AppCompatibilities.MICROSOFT_LENS)
 
     execute {
         RandomAccessFile(get(PLAT_LIBRARY_PATH), "rw").use { libplat ->
