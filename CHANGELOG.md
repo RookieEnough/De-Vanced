@@ -1,3 +1,9 @@
+## [1.6.3-dev.3](https://github.com/RookieEnough/De-Vanced/compare/v1.6.3-dev.2...v1.6.3-dev.3) (2026-11-02)
+
+### 🐛 Bug Fixes
+
+* Remove old Twitch patches that are now available at multiple other sources ([8d1cbbb](https://github.com/RookieEnough/De-Vanced/commit/8d1cbbb6f10eefabd62a6e91af3a7e17fdb14dd0))
+
 ## [1.6.3-dev.2](https://github.com/RookieEnough/De-Vanced/compare/v1.6.3-dev.1...v1.6.3-dev.2) (2026-11-02)
 
 ### 🐛 Bug Fixes
