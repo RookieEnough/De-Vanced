@@ -21,7 +21,7 @@ internal object PremiumTrialServiceGetPremiumTrialExpireDaysLegacyFingerprint : 
 )
 
 /**
- * Matches the trial-countdown site on 6.196.0.
+ * Matches the trial-countdown site on 6.196.0 and 6.202.1.
  *
  * There `PremiumTrialService.getPremiumTrialExpireDays()` no longer exists: the same
  * `7 - daysSinceFirstLaunch` computation was inlined into the (R8-obfuscated) search-result
@@ -40,7 +40,7 @@ internal object ComputePremiumTrialExpireDaysFingerprint : Fingerprint(
 )
 
 /**
- * Matches the trial-page routing site on 6.196.0 (the result pager adapter method that
+ * Matches the trial-page routing site on 6.196.0 and 6.202.1 (the result pager adapter method that
  * instantiates the trial fragment or, once expired, the preview page).
  *
  * Like the countdown above, it recomputes `7 - daysSinceFirstLaunch` inline, so without

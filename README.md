@@ -17,7 +17,7 @@
 [![Kotlin](https://img.shields.io/badge/Kotlin-1.9+-7F52FF?style=flat-square&logo=kotlin)](https://kotlinlang.org)
 [![Android](https://img.shields.io/badge/Platform-Android-3DDC84?style=flat-square&logo=android)](https://android.com)
 [![Gradle](https://img.shields.io/badge/Gradle-8.x-02303A?style=flat-square&logo=gradle)](https://gradle.org)
-[![Patches](https://img.shields.io/badge/Patches-25%20Apps-success?style=flat-square)](#supported-apps--patches)
+[![Patches](https://img.shields.io/badge/Patches-24%20Apps-success?style=flat-square)](#supported-apps--patches)
 
 </div>
 
@@ -82,7 +82,6 @@
 | Photomath | `com.microblink.photomath` | <ul><li>Spoof device ID</li><li>Signature detection</li><li>Unlock Plus</li><li>Bookpoint</li><li>Hide update popup</li></ul> |
 | Pixiv | `jp.pxv.android` | <ul><li>Hide ads</li><li>Remove popular search time limit</li></ul> |
 | Strava | `com.strava` | <ul><li>Group kudos</li><li>Hide distractions</li><li>Media download</li><li>Media upload</li><li>Disable quick edit</li><li>Password login</li><li>Block tracking</li><li>Unlock subscription</li><li>Disable upsell</li></ul> |
-| Twitch | `tv.twitch.android.app` | <ul><li>Block audio ads</li><li>Block embedded ads</li><li>Block video ads</li><li>Show deleted messages</li><li>Auto claim channel points</li><li>Debug mode</li></ul> |
 | Viber | `com.viber.voip` | <ul><li>Hide Ads</li><li>Hide navigation buttons</li></ul> |
 
 ---
@@ -99,6 +98,7 @@ The following apps have been removed from this repo because they are now activel
 - **SoundCloud**: Maintained by [Hoo-dles](https://github.com/hoo-dles/morphe-patches) and [kondratjev](https://github.com/kondratjev/morphe-patches)
 - **Threads**: Maintained by [durgesh0505](https://github.com/durgesh0505/chiggi_morphe_patches)
 - **Tumblr**: Maintained by [arandomhooman](https://github.com/arandomhooman/hoomans-morphe-patches)
+- **Twitch**: Maintained by [multiple sources](https://morphe-patches.software/?app=tv.twitch.android.app)
 
 ---
 

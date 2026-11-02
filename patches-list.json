@@ -1,6 +1,6 @@
 {
   "NOTE": "Do NOT manually edit this file. This file is automatically updated when semantic release (release.yml) runs. Manually editing this file can break your releases and break third party tools that use this file.",
-  "version": "1.6.2",
+  "version": "1.6.3-dev.3",
   "patches": [
     {
       "name": "AMOLED dark theme",
@@ -176,39 +176,6 @@
       "options": []
     },
     {
-      "name": "Auto claim channel points",
-      "description": "Automatically claim Channel Points.",
-      "default": true,
-      "dependencies": [],
-      "compatiblePackages": [
-        {
-          "packageName": "tv.twitch.android.app",
-          "name": "Twitch",
-          "description": null,
-          "apkFileType": null,
-          "appIconColor": "#9146FF",
-          "signatures": null,
-          "targets": [
-            {
-              "version": "16.9.1",
-              "versionCodes": null,
-              "isExperimental": false,
-              "minSdk": null,
-              "description": null
-            },
-            {
-              "version": "25.3.0",
-              "versionCodes": null,
-              "isExperimental": false,
-              "minSdk": null,
-              "description": null
-            }
-          ]
-        }
-      ],
-      "options": []
-    },
-    {
       "name": "Block Snowplow tracking",
       "description": "Blocks Snowplow analytics. See https://snowplow.io for more information.",
       "default": true,
@@ -224,105 +191,6 @@
           "targets": [
             {
               "version": "477.14",
-              "versionCodes": null,
-              "isExperimental": false,
-              "minSdk": null,
-              "description": null
-            }
-          ]
-        }
-      ],
-      "options": []
-    },
-    {
-      "name": "Block audio ads",
-      "description": "Blocks audio ads in streams and VODs.",
-      "default": true,
-      "dependencies": [],
-      "compatiblePackages": [
-        {
-          "packageName": "tv.twitch.android.app",
-          "name": "Twitch",
-          "description": null,
-          "apkFileType": null,
-          "appIconColor": "#9146FF",
-          "signatures": null,
-          "targets": [
-            {
-              "version": "16.9.1",
-              "versionCodes": null,
-              "isExperimental": false,
-              "minSdk": null,
-              "description": null
-            },
-            {
-              "version": "25.3.0",
-              "versionCodes": null,
-              "isExperimental": false,
-              "minSdk": null,
-              "description": null
-            }
-          ]
-        }
-      ],
-      "options": []
-    },
-    {
-      "name": "Block embedded ads",
-      "description": "Blocks embedded stream ads using services like Luminous or PurpleAdBlocker.",
-      "default": true,
-      "dependencies": [],
-      "compatiblePackages": [
-        {
-          "packageName": "tv.twitch.android.app",
-          "name": "Twitch",
-          "description": null,
-          "apkFileType": null,
-          "appIconColor": "#9146FF",
-          "signatures": null,
-          "targets": [
-            {
-              "version": "16.9.1",
-              "versionCodes": null,
-              "isExperimental": false,
-              "minSdk": null,
-              "description": null
-            },
-            {
-              "version": "25.3.0",
-              "versionCodes": null,
-              "isExperimental": false,
-              "minSdk": null,
-              "description": null
-            }
-          ]
-        }
-      ],
-      "options": []
-    },
-    {
-      "name": "Block video ads",
-      "description": "Blocks video ads in streams and VODs.",
-      "default": true,
-      "dependencies": [],
-      "compatiblePackages": [
-        {
-          "packageName": "tv.twitch.android.app",
-          "name": "Twitch",
-          "description": null,
-          "apkFileType": null,
-          "appIconColor": "#9146FF",
-          "signatures": null,
-          "targets": [
-            {
-              "version": "16.9.1",
-              "versionCodes": null,
-              "isExperimental": false,
-              "minSdk": null,
-              "description": null
-            },
-            {
-              "version": "25.3.0",
               "versionCodes": null,
               "isExperimental": false,
               "minSdk": null,
@@ -466,39 +334,6 @@
               "versionCodes": {
                 "ARM64_V8A": 475019344
               },
-              "isExperimental": false,
-              "minSdk": null,
-              "description": null
-            }
-          ]
-        }
-      ],
-      "options": []
-    },
-    {
-      "name": "Debug mode",
-      "description": "Enables Twitch's internal debugging mode.",
-      "default": false,
-      "dependencies": [],
-      "compatiblePackages": [
-        {
-          "packageName": "tv.twitch.android.app",
-          "name": "Twitch",
-          "description": null,
-          "apkFileType": null,
-          "appIconColor": "#9146FF",
-          "signatures": null,
-          "targets": [
-            {
-              "version": "16.9.1",
-              "versionCodes": null,
-              "isExperimental": false,
-              "minSdk": null,
-              "description": null
-            },
-            {
-              "version": "25.3.0",
-              "versionCodes": null,
               "isExperimental": false,
               "minSdk": null,
               "description": null
@@ -987,7 +822,7 @@
           "signatures": null,
           "targets": [
             {
-              "version": null,
+              "version": "16.0.19628.20008",
               "versionCodes": null,
               "isExperimental": false,
               "minSdk": null,
@@ -1205,6 +1040,13 @@
             },
             {
               "version": "6.196.0",
+              "versionCodes": null,
+              "isExperimental": false,
+              "minSdk": null,
+              "description": null
+            },
+            {
+              "version": "6.202.1",
               "versionCodes": null,
               "isExperimental": false,
               "minSdk": null,
@@ -1800,6 +1642,32 @@
       "options": []
     },
     {
+      "name": "Prevent native JVM invalidation",
+      "description": "Prevents Microsoft Lens's native signature check from clearing the JavaVM pointer and causing delayed crashes after the APK is re-signed.",
+      "default": true,
+      "dependencies": [],
+      "compatiblePackages": [
+        {
+          "packageName": "com.microsoft.office.officelens",
+          "name": "Microsoft Lens",
+          "description": null,
+          "apkFileType": null,
+          "appIconColor": "#D73E01",
+          "signatures": null,
+          "targets": [
+            {
+              "version": "16.0.19628.20008",
+              "versionCodes": null,
+              "isExperimental": false,
+              "minSdk": null,
+              "description": null
+            }
+          ]
+        }
+      ],
+      "options": []
+    },
+    {
       "name": "Reels 2x speed",
       "description": "Adds hold-to-speed and slide-to-lock gestures for Shorts.",
       "default": true,
@@ -1968,6 +1836,13 @@
               "isExperimental": false,
               "minSdk": null,
               "description": null
+            },
+            {
+              "version": "6.202.1",
+              "versionCodes": null,
+              "isExperimental": false,
+              "minSdk": null,
+              "description": null
             }
           ]
         }
@@ -2018,39 +1893,6 @@
           "targets": [
             {
               "version": null,
-              "versionCodes": null,
-              "isExperimental": false,
-              "minSdk": null,
-              "description": null
-            }
-          ]
-        }
-      ],
-      "options": []
-    },
-    {
-      "name": "Show deleted messages",
-      "description": "Shows deleted chat messages behind a clickable spoiler.",
-      "default": true,
-      "dependencies": [],
-      "compatiblePackages": [
-        {
-          "packageName": "tv.twitch.android.app",
-          "name": "Twitch",
-          "description": null,
-          "apkFileType": null,
-          "appIconColor": "#9146FF",
-          "signatures": null,
-          "targets": [
-            {
-              "version": "16.9.1",
-              "versionCodes": null,
-              "isExperimental": false,
-              "minSdk": null,
-              "description": null
-            },
-            {
-              "version": "25.3.0",
               "versionCodes": null,
               "isExperimental": false,
               "minSdk": null,

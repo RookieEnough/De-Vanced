@@ -130,6 +130,7 @@ internal object AppCompatibilities {
         targets = listOf(
             AppTarget("6.141.1"),
             AppTarget("6.196.0"),
+            AppTarget("6.202.1"),
         )
     )
 
@@ -150,6 +151,7 @@ internal object AppCompatibilities {
         name = "Microsoft Lens",
         packageName = "com.microsoft.office.officelens",
         appIconColor = 0xD73E01,
+        targets = listOf(AppTarget("16.0.19628.20008")),
     )
 
     val PHOTOMATH = Compatibility(
@@ -170,13 +172,6 @@ internal object AppCompatibilities {
         packageName = "com.strava",
         appIconColor = 0xFC6925,
         targets = listOf(AppTarget("477.14"))
-    )
-
-    val TWITCH = Compatibility(
-        name = "Twitch",
-        packageName = "tv.twitch.android.app",
-        appIconColor = 0x9146FF,
-        targets = listOf(AppTarget("16.9.1"), AppTarget("25.3.0")),
     )
 
     val VIBER = Compatibility(

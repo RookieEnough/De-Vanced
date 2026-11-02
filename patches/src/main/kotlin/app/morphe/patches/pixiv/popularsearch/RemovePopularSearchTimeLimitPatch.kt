@@ -29,8 +29,8 @@ val removePopularSearchTimeLimitPatch = bytecodePatch(
         // PremiumTrialService.getPremiumTrialExpireDays(); 6.196.0 inlined the same
         // `7 - daysSinceFirstLaunch` computation into the trial fragment method
         // (countdown display) and the result pager adapter (routing between the
-        // trial page and the preview page), so each version needs its own
-        // fingerprint (same as HideAdsPatch does).
+        // trial page and the preview page), and 6.202.1 kept that layout, so each
+        // version needs its own fingerprint (same as HideAdsPatch does).
         fun pinTrialCountdownToSevenDays(fingerprint: Fingerprint) {
             fingerprint.method.apply {
                 val daysSinceFirstLaunchSubIndex = fingerprint.instructionMatches.first().index
@@ -49,37 +49,41 @@ val removePopularSearchTimeLimitPatch = bytecodePatch(
             pinTrialCountdownToSevenDays(ComputePremiumTrialExpireDaysFingerprint)
             pinTrialCountdownToSevenDays(SearchResultTrialGateFingerprint)
 
-            // 6.196.0 additionally gates the trial page behind a server-driven flag
-            // that defaults to false when the server omits it: force the flag read
-            // to true. The read is located structurally (an iget-boolean directly
-            // feeding an if-eqz on the same register, unique in this method), so no
-            // obfuscated names are involved. The premium gate above it is
-            // intentionally left untouched.
-            SearchResultTrialGateFingerprint.method.apply {
-                val instructions = implementation?.instructions?.toList()
-                    ?: throw PatchException("Trial gate method has no implementation")
+            // 6.196.0 additionally gates the trial page behind a server-driven
+            // SearchResultTrialConfig flag that defaults to false when the server
+            // omits it, so it has to be forced to true. 6.202.1 removed that config
+            // together with the check, leaving only the account's isPremium flag,
+            // which must stay untouched (forcing it would unlock premium content).
+            if (packageMetadata.versionName == "6.196.0") {
+                // The read is located structurally (an iget-boolean directly
+                // feeding an if-eqz on the same register, unique in this method),
+                // so no obfuscated names are involved.
+                SearchResultTrialGateFingerprint.method.apply {
+                    val instructions = implementation?.instructions?.toList()
+                        ?: throw PatchException("Trial gate method has no implementation")
 
-                var flagReadIndex = -1
-                for (i in 1 until instructions.size) {
-                    val previous = instructions[i - 1]
-                    val current = instructions[i]
-                    val previousRegister = (previous as? Instruction22c)
-                        ?.takeIf { previous.opcode == Opcode.IGET_BOOLEAN }?.registerA
-                    val currentRegister = (current as? Instruction21t)
-                        ?.takeIf { current.opcode == Opcode.IF_EQZ }?.registerA
+                    var flagReadIndex = -1
+                    for (i in 1 until instructions.size) {
+                        val previous = instructions[i - 1]
+                        val current = instructions[i]
+                        val previousRegister = (previous as? Instruction22c)
+                            ?.takeIf { previous.opcode == Opcode.IGET_BOOLEAN }?.registerA
+                        val currentRegister = (current as? Instruction21t)
+                            ?.takeIf { current.opcode == Opcode.IF_EQZ }?.registerA
 
-                    if (previousRegister != null && previousRegister == currentRegister) {
-                        if (flagReadIndex != -1) throw PatchException("Ambiguous trial flag read")
-                        flagReadIndex = i - 1
+                        if (previousRegister != null && previousRegister == currentRegister) {
+                            if (flagReadIndex != -1) throw PatchException("Ambiguous trial flag read")
+                            flagReadIndex = i - 1
+                        }
                     }
-                }
-                if (flagReadIndex == -1) throw PatchException("Trial flag read not found")
+                    if (flagReadIndex == -1) throw PatchException("Trial flag read not found")
 
-                val flagRegister = (instructions[flagReadIndex] as Instruction22c).registerA
-                replaceInstruction(
-                    flagReadIndex,
-                    "const/4 v$flagRegister, 0x1"
-                )
+                    val flagRegister = (instructions[flagReadIndex] as Instruction22c).registerA
+                    replaceInstruction(
+                        flagReadIndex,
+                        "const/4 v$flagRegister, 0x1"
+                    )
+                }
             }
         }
     }
