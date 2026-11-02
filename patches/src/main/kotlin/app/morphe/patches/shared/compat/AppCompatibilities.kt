@@ -174,13 +174,6 @@ internal object AppCompatibilities {
         targets = listOf(AppTarget("477.14"))
     )
 
-    val TWITCH = Compatibility(
-        name = "Twitch",
-        packageName = "tv.twitch.android.app",
-        appIconColor = 0x9146FF,
-        targets = listOf(AppTarget("16.9.1"), AppTarget("25.3.0")),
-    )
-
     val VIBER = Compatibility(
         name = "Viber",
         packageName = "com.viber.voip",
