@@ -8,9 +8,7 @@ import app.morphe.patches.shared.compat.AppCompatibilities
 import app.morphe.patcher.patch.bytecodePatch
 import app.morphe.patcher.patch.intOption
 import app.morphe.patcher.patch.longOption
-import app.morphe.patcher.patch.PatchException
 import app.morphe.util.returnEarly
-import com.android.tools.smali.dexlib2.iface.ClassDef
 
 @Suppress("unused")
 val overwriteMediaUploadParametersPatch = bytecodePatch(
@@ -38,14 +36,8 @@ val overwriteMediaUploadParametersPatch = bytecodePatch(
     ) { it == null || it in 1..10000 }
 
     execute {
-        val mediaUploadParametersClass = run {
-            var foundClassDef: ClassDef? = null
-            classDefForEach { classDef ->
-                if (classDef.type.endsWith("/MediaUploadParameters;")) {
-                    foundClassDef = classDef
-                }
-            }
-            foundClassDef ?: throw PatchException("Could not find MediaUploadParameters class")
+        val mediaUploadParametersClass = classDefBy {
+            classDef -> classDef.type.endsWith("/MediaUploadParameters;")
         }
 
         compressionQuality?.let { compressionQuality ->
@@ -57,9 +49,8 @@ val overwriteMediaUploadParametersPatch = bytecodePatch(
             GetMaxDurationFingerprint.match(mediaUploadParametersClass).method.returnEarly(maxDuration)
         }
 
-        maxSize?.let {
-            GetMaxSizeFingerprint.match(mediaUploadParametersClass).method.returnEarly(it)
+        maxSize?.let { maxSize ->
+            GetMaxSizeFingerprint.match(mediaUploadParametersClass).method.returnEarly(maxSize)
         }
     }
 }
-

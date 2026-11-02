@@ -13,6 +13,7 @@ import app.morphe.patches.messenger.misc.extension.sharedExtensionPatch
 import app.morphe.util.findMutableMethodOf
 import app.morphe.util.getReference
 import app.morphe.util.returnEarly
+import app.morphe.util.returnEarlyNull
 import com.android.tools.smali.dexlib2.Opcode
 import com.android.tools.smali.dexlib2.iface.instruction.OneRegisterInstruction
 import com.android.tools.smali.dexlib2.iface.instruction.WideLiteralInstruction
@@ -73,7 +74,7 @@ val removeMetaAIPatch = bytecodePatch(
 
         // Remove the Meta AI floating button ("AI FAB") from every surface it appears on
         // (Chats, Notifications, etc.) by forcing its component's render to return null.
-        AiFabComponentFingerprint.method.returnEarly(null)
+        AiFabComponentFingerprint.method.returnEarlyNull()
 
         // Hide the "Create an AI" and "Chat with AIs" menu items by forcing their
         // visibility gates to report the item as disabled. There is one gate per surface,
