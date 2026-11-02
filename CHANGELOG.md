@@ -1,3 +1,9 @@
+## [1.6.3-dev.2](https://github.com/RookieEnough/De-Vanced/compare/v1.6.3-dev.1...v1.6.3-dev.2) (2026-11-02)
+
+### 🐛 Bug Fixes
+
+* **Microsoft Lens:** Prevent native JVM invalidation ([#174](https://github.com/RookieEnough/De-Vanced/issues/174)) ([bcfbd3c](https://github.com/RookieEnough/De-Vanced/commit/bcfbd3cd20b43233c8a6ef0b4c5da7951a0e7d1e))
+
 ## [1.6.3-dev.1](https://github.com/RookieEnough/De-Vanced/compare/v1.6.2...v1.6.3-dev.1) (2026-10-31)
 
 ### 🐛 Bug Fixes

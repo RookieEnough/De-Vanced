@@ -1,6 +1,6 @@
 {
   "NOTE": "Do NOT manually edit this file. This file is automatically updated when semantic release (release.yml) runs. Manually editing this file can break your releases and break third party tools that use this file.",
-  "version": "1.6.3-dev.1",
+  "version": "1.6.3-dev.2",
   "patches": [
     {
       "name": "AMOLED dark theme",
@@ -987,7 +987,7 @@
           "signatures": null,
           "targets": [
             {
-              "version": null,
+              "version": "16.0.19628.20008",
               "versionCodes": null,
               "isExperimental": false,
               "minSdk": null,
@@ -1796,6 +1796,32 @@
           "targets": [
             {
               "version": "26.36.1",
+              "versionCodes": null,
+              "isExperimental": false,
+              "minSdk": null,
+              "description": null
+            }
+          ]
+        }
+      ],
+      "options": []
+    },
+    {
+      "name": "Prevent native JVM invalidation",
+      "description": "Prevents Microsoft Lens's native signature check from clearing the JavaVM pointer and causing delayed crashes after the APK is re-signed.",
+      "default": true,
+      "dependencies": [],
+      "compatiblePackages": [
+        {
+          "packageName": "com.microsoft.office.officelens",
+          "name": "Microsoft Lens",
+          "description": null,
+          "apkFileType": null,
+          "appIconColor": "#D73E01",
+          "signatures": null,
+          "targets": [
+            {
+              "version": "16.0.19628.20008",
               "versionCodes": null,
               "isExperimental": false,
               "minSdk": null,
