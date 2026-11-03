@@ -1,3 +1,9 @@
+## [1.6.4-dev.1](https://github.com/RookieEnough/De-Vanced/compare/v1.6.3...v1.6.4-dev.1) (2026-11-03)
+
+### 🐛 Bug Fixes
+
+* **Strava:** Fix `Overwrite media upload parameters` patch ([7c7a9af](https://github.com/RookieEnough/De-Vanced/commit/7c7a9af6e39c6ea892d4883151e2ddefe52376cc))
+
 ## [1.6.3](https://github.com/RookieEnough/De-Vanced/compare/v1.6.2...v1.6.3) (2026-11-02)
 
 ### 🐛 Bug Fixes
