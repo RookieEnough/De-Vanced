@@ -1,6 +1,6 @@
 {
   "NOTE": "Do NOT manually edit this file. This file is automatically updated when semantic release (release.yml) runs. Manually editing this file can break your releases and break third party tools that use this file.",
-  "version": "1.6.4-dev.1",
+  "version": "1.6.4-dev.2",
   "patches": [
     {
       "name": "AMOLED dark theme",
@@ -509,10 +509,10 @@
           "signatures": null,
           "targets": [
             {
-              "version": "573.0.0.44.88",
+              "version": "586.0.0.55.92",
               "versionCodes": {
-                "ARMEABI_V7A": 344611781,
-                "ARM64_V8A": 344611864
+                "ARMEABI_V7A": 347215341,
+                "ARM64_V8A": 347215343
               },
               "isExperimental": false,
               "minSdk": null,
@@ -793,10 +793,10 @@
           "signatures": null,
           "targets": [
             {
-              "version": "573.0.0.44.88",
+              "version": "586.0.0.55.92",
               "versionCodes": {
-                "ARMEABI_V7A": 344611781,
-                "ARM64_V8A": 344611864
+                "ARMEABI_V7A": 347215341,
+                "ARM64_V8A": 347215343
               },
               "isExperimental": false,
               "minSdk": null,
@@ -1164,10 +1164,10 @@
           "signatures": null,
           "targets": [
             {
-              "version": "573.0.0.44.88",
+              "version": "586.0.0.55.92",
               "versionCodes": {
-                "ARMEABI_V7A": 344611781,
-                "ARM64_V8A": 344611864
+                "ARMEABI_V7A": 347215341,
+                "ARM64_V8A": 347215343
               },
               "isExperimental": false,
               "minSdk": null,
@@ -1193,10 +1193,10 @@
           "signatures": null,
           "targets": [
             {
-              "version": "573.0.0.44.88",
+              "version": "586.0.0.55.92",
               "versionCodes": {
-                "ARMEABI_V7A": 344611781,
-                "ARM64_V8A": 344611864
+                "ARMEABI_V7A": 347215341,
+                "ARM64_V8A": 347215343
               },
               "isExperimental": false,
               "minSdk": null,
@@ -1222,10 +1222,10 @@
           "signatures": null,
           "targets": [
             {
-              "version": "573.0.0.44.88",
+              "version": "586.0.0.55.92",
               "versionCodes": {
-                "ARMEABI_V7A": 344611781,
-                "ARM64_V8A": 344611864
+                "ARMEABI_V7A": 347215341,
+                "ARM64_V8A": 347215343
               },
               "isExperimental": false,
               "minSdk": null,
@@ -1481,10 +1481,10 @@
           "signatures": null,
           "targets": [
             {
-              "version": "573.0.0.44.88",
+              "version": "586.0.0.55.92",
               "versionCodes": {
-                "ARMEABI_V7A": 344611781,
-                "ARM64_V8A": 344611864
+                "ARMEABI_V7A": 347215341,
+                "ARM64_V8A": 347215343
               },
               "isExperimental": false,
               "minSdk": null,
@@ -1717,10 +1717,10 @@
           "signatures": null,
           "targets": [
             {
-              "version": "573.0.0.44.88",
+              "version": "586.0.0.55.92",
               "versionCodes": {
-                "ARMEABI_V7A": 344611781,
-                "ARM64_V8A": 344611864
+                "ARMEABI_V7A": 347215341,
+                "ARM64_V8A": 347215343
               },
               "isExperimental": false,
               "minSdk": null,
@@ -2107,10 +2107,10 @@
           "signatures": null,
           "targets": [
             {
-              "version": "573.0.0.44.88",
+              "version": "586.0.0.55.92",
               "versionCodes": {
-                "ARMEABI_V7A": 344611781,
-                "ARM64_V8A": 344611864
+                "ARMEABI_V7A": 347215341,
+                "ARM64_V8A": 347215343
               },
               "isExperimental": false,
               "minSdk": null,

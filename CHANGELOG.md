@@ -1,3 +1,9 @@
+## [1.6.4-dev.2](https://github.com/RookieEnough/De-Vanced/compare/v1.6.4-dev.1...v1.6.4-dev.2) (2026-11-04)
+
+### 🐛 Bug Fixes
+
+* **Messenger:** Add support for `586.0.0.55.92` ([#177](https://github.com/RookieEnough/De-Vanced/issues/177)) ([17584e2](https://github.com/RookieEnough/De-Vanced/commit/17584e2903e907c1d63b408cbf4201fc7b76a8e0))
+
 ## [1.6.4-dev.1](https://github.com/RookieEnough/De-Vanced/compare/v1.6.3...v1.6.4-dev.1) (2026-11-03)
 
 ### 🐛 Bug Fixes
