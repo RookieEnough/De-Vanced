@@ -98,9 +98,10 @@ internal object AppCompatibilities {
         appIconColor = 0x0866FF,
         targets = listOf(
             AppTarget(
-                version = "585.0.0.53.94",
+                version = "586.0.0.55.92",
                 versionCodes = mapOf(
-                    SupportedAbi.ARM64_V8A to 347014976
+                    SupportedAbi.ARMEABI_V7A to 347215341,
+                    SupportedAbi.ARM64_V8A to 347215343
                 )
             )
         )
