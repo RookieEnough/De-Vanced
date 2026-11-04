@@ -55,6 +55,9 @@ import com.android.tools.smali.dexlib2.Opcode.MOVE_RESULT_WIDE
 import com.android.tools.smali.dexlib2.Opcode.RETURN
 import com.android.tools.smali.dexlib2.Opcode.RETURN_OBJECT
 import com.android.tools.smali.dexlib2.Opcode.RETURN_WIDE
+import com.android.tools.smali.dexlib2.analysis.reflection.util.ReflectionUtils
+import com.android.tools.smali.dexlib2.builder.MutableMethodImplementation
+import com.android.tools.smali.dexlib2.formatter.DexFormatter
 import com.android.tools.smali.dexlib2.iface.ClassDef
 import com.android.tools.smali.dexlib2.iface.Method
 import com.android.tools.smali.dexlib2.iface.MethodParameter
@@ -68,10 +71,32 @@ import com.android.tools.smali.dexlib2.iface.reference.FieldReference
 import com.android.tools.smali.dexlib2.iface.reference.MethodReference
 import com.android.tools.smali.dexlib2.iface.reference.Reference
 import com.android.tools.smali.dexlib2.iface.reference.StringReference
+import com.android.tools.smali.dexlib2.iface.value.BooleanEncodedValue
+import com.android.tools.smali.dexlib2.iface.value.ByteEncodedValue
+import com.android.tools.smali.dexlib2.iface.value.CharEncodedValue
+import com.android.tools.smali.dexlib2.iface.value.DoubleEncodedValue
+import com.android.tools.smali.dexlib2.iface.value.EncodedValue
+import com.android.tools.smali.dexlib2.iface.value.FloatEncodedValue
+import com.android.tools.smali.dexlib2.iface.value.IntEncodedValue
+import com.android.tools.smali.dexlib2.iface.value.LongEncodedValue
+import com.android.tools.smali.dexlib2.iface.value.NullEncodedValue
+import com.android.tools.smali.dexlib2.iface.value.ShortEncodedValue
+import com.android.tools.smali.dexlib2.iface.value.StringEncodedValue
 import com.android.tools.smali.dexlib2.immutable.ImmutableField
 import com.android.tools.smali.dexlib2.immutable.ImmutableMethod
 import com.android.tools.smali.dexlib2.immutable.ImmutableMethodImplementation
+import com.android.tools.smali.dexlib2.immutable.value.ImmutableBooleanEncodedValue
+import com.android.tools.smali.dexlib2.immutable.value.ImmutableByteEncodedValue
+import com.android.tools.smali.dexlib2.immutable.value.ImmutableCharEncodedValue
+import com.android.tools.smali.dexlib2.immutable.value.ImmutableDoubleEncodedValue
+import com.android.tools.smali.dexlib2.immutable.value.ImmutableFloatEncodedValue
+import com.android.tools.smali.dexlib2.immutable.value.ImmutableIntEncodedValue
+import com.android.tools.smali.dexlib2.immutable.value.ImmutableLongEncodedValue
+import com.android.tools.smali.dexlib2.immutable.value.ImmutableNullEncodedValue
+import com.android.tools.smali.dexlib2.immutable.value.ImmutableShortEncodedValue
+import com.android.tools.smali.dexlib2.immutable.value.ImmutableStringEncodedValue
 import com.android.tools.smali.dexlib2.util.MethodUtil
+import kotlin.plus
 
 /**
  * Find the instruction index used for a toString() StringBuilder write of a given String name.
@@ -162,7 +187,7 @@ private fun Method.findInstructionIndexFromToString(fieldName: String, isField: 
  *
  * @param fieldName The name of the field to find. Partial matches are allowed.
  */
-context(patchContext: BytecodePatchContext)
+context(_: BytecodePatchContext)
 fun Method.findMethodFromToString(fieldName: String) : MutableMethod {
     val methodUsageIndex = findInstructionIndexFromToString(fieldName, false)
     return getInstruction(methodUsageIndex).getReference<MethodReference>()!!.getMutableMethod()
@@ -187,7 +212,7 @@ fun Method.findFieldFromToString(fieldName: String) : FieldReference {
  * @param requireMatches If true and no matches exist, an exception is thrown.
  * @param block Method iteration block. Indexes are iterated from last to first.
  */
-context(patchContext: BytecodePatchContext)
+context(_: BytecodePatchContext)
 fun InstructionFilter.matchAllMethodIndicesForEach(
     requireMatches: Boolean = true,
     block: MutableMethod.(Int) -> Unit
@@ -204,7 +229,7 @@ fun InstructionFilter.matchAllMethodIndicesForEach(
  *
  * An exception is thrown if no matches exist or more than 1 match exists.
  */
-context(patchContext: BytecodePatchContext)
+context(_: BytecodePatchContext)
 fun Fingerprint.matchSingle() = matchAll(1 .. 1).first()
 
 // TODO If this function remains unchanged for a while then move this to morphe-patcher.
@@ -219,7 +244,7 @@ fun Fingerprint.matchSingle() = matchAll(1 .. 1).first()
  * @param requireMatches If true and no matches exist, an exception is thrown.
  * @param block Method iteration block. Indexes are iterated from last to first.
  */
-context(patchContext: BytecodePatchContext)
+context(_: BytecodePatchContext)
 fun Fingerprint.matchAllMethodIndicesForEach(
     requireMatches: Boolean = true,
     block: MutableMethod.(Int) -> Unit
@@ -1351,36 +1376,26 @@ val Method.p0Register: Int
 fun MutableMethod.fiveRegisters(index: Int) = getInstruction<FiveRegisterInstruction>(index)
     .registersUsed.joinToString(",") { "v$it" }
 
-private const val RETURN_TYPE_MISMATCH = "Mismatch between override type and Method return type"
-
 /**
- * Overrides the first instruction of a method with a return-void instruction.
+ * Overrides the first instruction of a method with a `return-void` instruction.
  * None of the method code will ever execute.
  *
  * @see returnLate
  */
+context(_: BytecodePatchContext?)
 fun MutableMethod.returnEarly() {
-    check(returnType.first() == 'V') {
-        RETURN_TYPE_MISMATCH
-    }
-    overrideReturnValue(false.toHexString(), false)
+    checkReturnType(setOf(Void::class.javaPrimitiveType!!))
+    overrideReturnValue(null, false)
 }
 
 /**
  * Overrides the first instruction of a method with a constant `Boolean` return value.
  * None of the original method code will execute.
  *
- * For methods that return an object or any array type, calling this method with `false`
- * will force the method to return a `null` value.
- *
  * @see returnLate
  */
-fun MutableMethod.returnEarly(value: Boolean) {
-    check(returnType.first() == 'Z') {
-        RETURN_TYPE_MISMATCH
-    }
-    overrideReturnValue(value.toHexString(), false)
-}
+context(_: BytecodePatchContext?)
+fun MutableMethod.returnEarly(value: Boolean) = returnBoolean(value, false)
 
 /**
  * Overrides the first instruction of a method with a constant `Byte` return value.
@@ -1388,10 +1403,8 @@ fun MutableMethod.returnEarly(value: Boolean) {
  *
  * @see returnLate
  */
-fun MutableMethod.returnEarly(value: Byte) {
-    check(returnType.first() == 'B') { RETURN_TYPE_MISMATCH }
-    overrideReturnValue(value.toString(), false)
-}
+context(_: BytecodePatchContext?)
+fun MutableMethod.returnEarly(value: Byte) = returnByte(value, false)
 
 /**
  * Overrides the first instruction of a method with a constant `Short` return value.
@@ -1399,10 +1412,8 @@ fun MutableMethod.returnEarly(value: Byte) {
  *
  * @see returnLate
  */
-fun MutableMethod.returnEarly(value: Short) {
-    check(returnType.first() == 'S') { RETURN_TYPE_MISMATCH }
-    overrideReturnValue(value.toString(), false)
-}
+context(_: BytecodePatchContext?)
+fun MutableMethod.returnEarly(value: Short) = returnShort(value, false)
 
 /**
  * Overrides the first instruction of a method with a constant `Char` return value.
@@ -1410,10 +1421,8 @@ fun MutableMethod.returnEarly(value: Short) {
  *
  * @see returnLate
  */
-fun MutableMethod.returnEarly(value: Char) {
-    check(returnType.first() == 'C') { RETURN_TYPE_MISMATCH }
-    overrideReturnValue(value.code.toString(), false)
-}
+context(_: BytecodePatchContext?)
+fun MutableMethod.returnEarly(value: Char) = returnChar(value, false)
 
 /**
  * Overrides the first instruction of a method with a constant `Int` return value.
@@ -1421,10 +1430,8 @@ fun MutableMethod.returnEarly(value: Char) {
  *
  * @see returnLate
  */
-fun MutableMethod.returnEarly(value: Int) {
-    check(returnType.first() == 'I') { RETURN_TYPE_MISMATCH }
-    overrideReturnValue(value.toString(), false)
-}
+context(_: BytecodePatchContext?)
+fun MutableMethod.returnEarly(value: Int) = returnInt(value, false)
 
 /**
  * Overrides the first instruction of a method with a constant `Long` return value.
@@ -1432,10 +1439,8 @@ fun MutableMethod.returnEarly(value: Int) {
  *
  * @see returnLate
  */
-fun MutableMethod.returnEarly(value: Long) {
-    check(returnType.first() == 'J') { RETURN_TYPE_MISMATCH }
-    overrideReturnValue("${value}L", false)
-}
+context(_: BytecodePatchContext?)
+fun MutableMethod.returnEarly(value: Long) = returnLong(value, false)
 
 /**
  * Overrides the first instruction of a method with a constant `Float` return value.
@@ -1443,10 +1448,8 @@ fun MutableMethod.returnEarly(value: Long) {
  *
  * @see returnLate
  */
-fun MutableMethod.returnEarly(value: Float) {
-    check(returnType.first() == 'F') { RETURN_TYPE_MISMATCH }
-    overrideReturnValue("${value}F", false)
-}
+context(_: BytecodePatchContext?)
+fun MutableMethod.returnEarly(value: Float) = returnFloat(value, false)
 
 /**
  * Overrides the first instruction of a method with a constant `Double` return value.
@@ -1454,58 +1457,35 @@ fun MutableMethod.returnEarly(value: Float) {
  *
  * @see returnLate
  */
-fun MutableMethod.returnEarly(value: Double) {
-    check(returnType.first() == 'D') { RETURN_TYPE_MISMATCH }
-    overrideReturnValue(value.toString(), false)
-}
+context(_: BytecodePatchContext?)
+fun MutableMethod.returnEarly(value: Double) = returnDouble(value, false)
 
 /**
  * Overrides the first instruction of a method with a constant String return value.
  * None of the original method code will execute.
  *
- * Target method must have return type
- * Ljava/lang/String; or Ljava/lang/CharSequence;
- *
  * @see returnLate
  */
-fun MutableMethod.returnEarly(value: String) {
-    check(returnType == "Ljava/lang/String;" || returnType == "Ljava/lang/CharSequence;") {
-        RETURN_TYPE_MISMATCH
-    }
-    overrideReturnValue(value, false)
-}
+context(_: BytecodePatchContext?)
+fun MutableMethod.returnEarly(value: String) = returnString(value, false)
 
 /**
  * Overrides the first instruction of a method with a constant `NULL` return value.
  * None of the original method code will execute.
  *
- * @param value Value must be `Null`.
  * @see returnLate
  */
-fun MutableMethod.returnEarly(value: Void?) {
-    val returnType = returnType.first()
-    check(returnType == 'L' || returnType == '[') {
-        RETURN_TYPE_MISMATCH
-    }
-    overrideReturnValue(null, false)
-}
+context(_: BytecodePatchContext?)
+fun MutableMethod.returnEarlyNull() = returnNull(false)
 
 /**
  * Overrides all return statements with a constant `Boolean` value.
  * All method code is executed the same as unpatched.
  *
- * For methods that return an object or any array type, calling this method with `false`
- * will force the method to return a `null` value.
- *
  * @see returnEarly
  */
-fun MutableMethod.returnLate(value: Boolean) {
-    check(this.returnType.first() == 'Z') {
-        RETURN_TYPE_MISMATCH
-    }
-
-    overrideReturnValue(value.toHexString(), true)
-}
+context(_: BytecodePatchContext?)
+fun MutableMethod.returnLate(value: Boolean) = returnBoolean(value, true)
 
 /**
  * Overrides all return statements with a constant `Byte` value.
@@ -1513,10 +1493,8 @@ fun MutableMethod.returnLate(value: Boolean) {
  *
  * @see returnEarly
  */
-fun MutableMethod.returnLate(value: Byte) {
-    check(returnType.first() == 'B') { RETURN_TYPE_MISMATCH }
-    overrideReturnValue(value.toString(), true)
-}
+context(_: BytecodePatchContext?)
+fun MutableMethod.returnLate(value: Byte) = returnByte(value, true)
 
 /**
  * Overrides all return statements with a constant `Short` value.
@@ -1524,10 +1502,8 @@ fun MutableMethod.returnLate(value: Byte) {
  *
  * @see returnEarly
  */
-fun MutableMethod.returnLate(value: Short) {
-    check(returnType.first() == 'S') { RETURN_TYPE_MISMATCH }
-    overrideReturnValue(value.toString(), true)
-}
+context(_: BytecodePatchContext?)
+fun MutableMethod.returnLate(value: Short) = returnShort(value, true)
 
 /**
  * Overrides all return statements with a constant `Char` value.
@@ -1535,10 +1511,8 @@ fun MutableMethod.returnLate(value: Short) {
  *
  * @see returnEarly
  */
-fun MutableMethod.returnLate(value: Char) {
-    check(returnType.first() == 'C') { RETURN_TYPE_MISMATCH }
-    overrideReturnValue(value.code.toString(), true)
-}
+context(_: BytecodePatchContext?)
+fun MutableMethod.returnLate(value: Char) = returnChar(value, true)
 
 /**
  * Overrides all return statements with a constant `Int` value.
@@ -1546,10 +1520,8 @@ fun MutableMethod.returnLate(value: Char) {
  *
  * @see returnEarly
  */
-fun MutableMethod.returnLate(value: Int) {
-    check(returnType.first() == 'I') { RETURN_TYPE_MISMATCH }
-    overrideReturnValue(value.toString(), true)
-}
+context(_: BytecodePatchContext?)
+fun MutableMethod.returnLate(value: Int) = returnInt(value, true)
 
 /**
  * Overrides all return statements with a constant `Long` value.
@@ -1557,10 +1529,8 @@ fun MutableMethod.returnLate(value: Int) {
  *
  * @see returnEarly
  */
-fun MutableMethod.returnLate(value: Long) {
-    check(returnType.first() == 'J') { RETURN_TYPE_MISMATCH }
-    overrideReturnValue("${value}L", true)
-}
+context(_: BytecodePatchContext?)
+fun MutableMethod.returnLate(value: Long) = returnLong(value, true)
 
 /**
  * Overrides all return statements with a constant `Float` value.
@@ -1568,10 +1538,8 @@ fun MutableMethod.returnLate(value: Long) {
  *
  * @see returnEarly
  */
-fun MutableMethod.returnLate(value: Float) {
-    check(returnType.first() == 'F') { RETURN_TYPE_MISMATCH }
-    overrideReturnValue("${value}F", true)
-}
+context(_: BytecodePatchContext?)
+fun MutableMethod.returnLate(value: Float) = returnFloat(value, true)
 
 /**
  * Overrides all return statements with a constant `Double` value.
@@ -1579,10 +1547,8 @@ fun MutableMethod.returnLate(value: Float) {
  *
  * @see returnEarly
  */
-fun MutableMethod.returnLate(value: Double) {
-    check(returnType.first() == 'D') { RETURN_TYPE_MISMATCH }
-    overrideReturnValue(value.toString(), true)
-}
+context(_: BytecodePatchContext?)
+fun MutableMethod.returnLate(value: Double) = returnDouble(value, true)
 
 /**
  * Overrides all return statements with a constant String value.
@@ -1593,87 +1559,282 @@ fun MutableMethod.returnLate(value: Double) {
  *
  * @see returnEarly
  */
-fun MutableMethod.returnLate(value: String) {
-    check(returnType == "Ljava/lang/String;" || returnType == "Ljava/lang/CharSequence;") {
-        RETURN_TYPE_MISMATCH
-    }
-    overrideReturnValue(value, true)
-}
+context(_: BytecodePatchContext?)
+fun MutableMethod.returnLate(value: String) = returnString(value, true)
 
 /**
  * Overrides all return statements with a constant `Null` value.
  * All method code is executed the same as unpatched.
  *
- * @param value Value must be `Null`.
  * @see returnEarly
  */
-fun MutableMethod.returnLate(value: Void?) {
-    val returnType = returnType.first()
-    check(returnType == 'L' || returnType == '[') {
-        RETURN_TYPE_MISMATCH
-    }
+context(_: BytecodePatchContext?)
+fun MutableMethod.returnLateNull() = returnNull(true)
 
-    overrideReturnValue(null, true)
+context(_: BytecodePatchContext?)
+private fun MutableMethod.returnBoolean(value: Boolean, returnLate: Boolean) {
+    checkReturnType(Boolean::class.javaObjectType.allAssignableTypes() + Boolean::class.javaPrimitiveType!!)
+    overrideReturnValue(ImmutableBooleanEncodedValue.forBoolean(value), returnLate)
 }
 
-private fun MutableMethod.overrideReturnValue(value: String?, returnLate: Boolean) {
-    val instructions = if (value != null && (returnType == "Ljava/lang/String;" || returnType == "Ljava/lang/CharSequence;")) {
-        """
-            const-string v0, "$value"
-            return-object v0
-        """
-    } else when (returnType.first()) {
-        // If return type is an object, always return null.
-        'L', '[' -> {
-            """
+context(_: BytecodePatchContext?)
+private fun MutableMethod.returnByte(value: Byte, returnLate: Boolean) {
+    checkReturnType(Byte::class.javaObjectType.allAssignableTypes() + Byte::class.javaPrimitiveType!!)
+    overrideReturnValue(ImmutableByteEncodedValue(value), returnLate)
+}
+
+context(_: BytecodePatchContext?)
+private fun MutableMethod.returnShort(value: Short, returnLate: Boolean) {
+    checkReturnType(Short::class.javaObjectType.allAssignableTypes() + Short::class.javaPrimitiveType!!)
+    overrideReturnValue(ImmutableShortEncodedValue(value), returnLate)
+}
+
+context(_: BytecodePatchContext?)
+private fun MutableMethod.returnChar(value: Char, returnLate: Boolean) {
+    checkReturnType(Char::class.javaObjectType.allAssignableTypes() + Char::class.javaPrimitiveType!!)
+    overrideReturnValue(ImmutableCharEncodedValue(value), returnLate)
+}
+
+context(_: BytecodePatchContext?)
+private fun MutableMethod.returnInt(value: Int, returnLate: Boolean) {
+    checkReturnType(Int::class.javaObjectType.allAssignableTypes() + Int::class.javaPrimitiveType!!)
+    overrideReturnValue(ImmutableIntEncodedValue(value), returnLate)
+}
+
+context(_: BytecodePatchContext?)
+private fun MutableMethod.returnLong(value: Long, returnLate: Boolean) {
+    checkReturnType(Long::class.javaObjectType.allAssignableTypes() + Long::class.javaPrimitiveType!!)
+    overrideReturnValue(ImmutableLongEncodedValue(value), returnLate)
+}
+
+context(_: BytecodePatchContext?)
+private fun MutableMethod.returnFloat(value: Float, returnLate: Boolean) {
+    checkReturnType(Float::class.javaObjectType.allAssignableTypes() + Float::class.javaPrimitiveType!!)
+    overrideReturnValue(ImmutableFloatEncodedValue(value), returnLate)
+}
+
+context(_: BytecodePatchContext?)
+private fun MutableMethod.returnDouble(value: Double, returnLate: Boolean) {
+    checkReturnType(Double::class.javaObjectType.allAssignableTypes() + Double::class.javaPrimitiveType!!)
+    overrideReturnValue(ImmutableDoubleEncodedValue(value), returnLate)
+}
+
+context(_: BytecodePatchContext?)
+private fun MutableMethod.returnString(value: String, returnLate: Boolean) {
+    checkReturnType(String::class.java.allAssignableTypes())
+    overrideReturnValue(ImmutableStringEncodedValue(value), returnLate)
+}
+
+context(_: BytecodePatchContext?)
+private fun MutableMethod.returnNull(returnLate: Boolean) {
+    checkReturnTypeNullable()
+    overrideReturnValue(ImmutableNullEncodedValue.INSTANCE, returnLate)
+}
+
+context(context: BytecodePatchContext?)
+private fun MutableMethod.overrideReturnValue(value: EncodedValue?, returnLate: Boolean) {
+    val neededRegisters: Int
+    val instructions = if (value == null) {
+        require(!returnLate) {
+            "Cannot return late for method of void type"
+        }
+        neededRegisters = 0
+        "return-void"
+    } else {
+        val encodedValue = DexFormatter.INSTANCE.getEncodedValue(value)
+        when (value) {
+            is NullEncodedValue -> {
+                neededRegisters = 1
+                """
                 const/4 v0, 0x0
                 return-object v0
-            """
-        }
+                """
+            }
 
-        'V' -> {
-            "return-void"
-        }
+            is StringEncodedValue -> {
+                neededRegisters = 1
+                """
+                const-string v0, $encodedValue
+                return-object v0
+                """
+            }
 
-        'B', 'Z' -> {
-            """
-                const/4 v0, $value
-                return v0
-            """
-        }
+            is ByteEncodedValue -> {
+                neededRegisters = 1
+                if (returnType == "B") {
+                    """
+                    const/4 v0, $encodedValue
+                    return v0
+                    """
+                } else {
+                    """
+                    const/4 v0, $encodedValue
+                    invoke-static { v0 }, Ljava/lang/Byte;->valueOf(B)Ljava/lang/Byte;
+                    move-result-object v0
+                    return-object v0
+                    """
+                }
+            }
 
-        'S', 'C' -> {
-            """
-                const/16 v0, $value
-                return v0
-            """
-        }
+            is BooleanEncodedValue -> {
+                neededRegisters = 1
+                val encodedValue = value.value.toHexString()
+                if (returnType == "Z") {
+                    """
+                    const/4 v0, $encodedValue
+                    return v0
+                    """
+                } else {
+                    """
+                    const/4 v0, $encodedValue
+                    invoke-static { v0 }, Ljava/lang/Boolean;->valueOf(Z)Ljava/lang/Boolean;
+                    move-result-object v0
+                    return-object v0
+                    """
+                }
+            }
 
-        'I', 'F' -> {
-            """
-                const v0, $value
-                return v0
-            """
-        }
+            is ShortEncodedValue -> {
+                neededRegisters = 1
+                if (returnType == "S") {
+                    """
+                    const/16 v0, $encodedValue
+                    return v0
+                    """
+                } else {
+                    """
+                    const/16 v0, $encodedValue
+                    invoke-static { v0 }, Ljava/lang/Short;->valueOf(S)Ljava/lang/Short;
+                    move-result-object v0
+                    return-object v0
+                    """
+                }
+            }
 
-        'J', 'D' -> {
-            """
-                const-wide v0, $value
-                return-wide v0
-            """
-        }
+            is CharEncodedValue -> {
+                neededRegisters = 1
+                if (returnType == "C") {
+                    """
+                    const/16 v0, $encodedValue
+                    return v0
+                    """
+                } else {
+                    """
+                    const/16 v0, $encodedValue
+                    invoke-static { v0 }, Ljava/lang/Character;->valueOf(C)Ljava/lang/Character;
+                    move-result-object v0
+                    return-object v0
+                    """
+                }
+            }
 
-        else -> throw Exception("Return type is not supported: $this")
+            is IntEncodedValue -> {
+                neededRegisters = 1
+                if (returnType == "I") {
+                    """
+                    const v0, $encodedValue
+                    return v0
+                    """
+                } else {
+                    """
+                    const v0, $encodedValue
+                    invoke-static { v0 }, Ljava/lang/Integer;->valueOf(I)Ljava/lang/Integer;
+                    move-result-object v0
+                    return-object v0
+                    """
+                }
+            }
+
+            is FloatEncodedValue -> {
+                neededRegisters = 1
+                val encodedValue = "${encodedValue}f"
+                if (returnType == "F") {
+                    """
+                    const v0, $encodedValue
+                    return v0
+                    """
+                } else {
+                    """
+                    const v0, $encodedValue
+                    invoke-static { v0 }, Ljava/lang/Float;->valueOf(F)Ljava/lang/Float;
+                    move-result-object v0
+                    return-object v0
+                    """
+                }
+            }
+
+            is LongEncodedValue -> {
+                neededRegisters = 2
+                val encodedValue = "${encodedValue}L"
+                if (returnType == "J") {
+                    """
+                    const-wide v0, $encodedValue
+                    return-wide v0
+                    """
+                } else {
+                    """
+                    const-wide v0, $encodedValue
+                    invoke-static { v0, v1 }, Ljava/lang/Long;->valueOf(J)Ljava/lang/Long;
+                    move-result-object v0
+                    return-object v0
+                    """
+                }
+            }
+
+            is DoubleEncodedValue -> {
+                neededRegisters = 2
+                if (returnType == "D") {
+                    """
+                    const-wide v0, $encodedValue
+                    return-wide v0
+                    """
+                } else {
+                    """
+                    const-wide v0, $encodedValue
+                    invoke-static { v0, v1 }, Ljava/lang/Double;->valueOf(D)Ljava/lang/Double;
+                    move-result-object v0
+                    return-object v0
+                    """
+                }
+            }
+
+            else -> throw IllegalArgumentException("Value $value cannot be returned from $this")
+        }
+    }
+
+    val helperMethodInvocationInstructions: String? = run {
+        if (neededRegisters <= implementation!!.registerCount) {
+            return@run null
+        }
+        requireNotNull(context) { "BytecodePatchContext needed for helper method creation." }
+        val helperMethod = ImmutableMethod(
+            definingClass,
+            "$name\$helper",
+            listOf(),
+            returnType,
+            AccessFlags.PRIVATE.value or AccessFlags.STATIC.value,
+            setOf(),
+            setOf(),
+            MutableMethodImplementation(neededRegisters)
+        ).toMutable().apply {
+            addInstructions(0, instructions)
+        }
+        context.mutableClassDefBy { it.type == definingClass }.methods.add(helperMethod)
+        """
+            invoke-static {}, $helperMethod
+            move-result-object v0
+            return-object v0
+        """
     }
 
     if (returnLate) {
         findInstructionIndicesReversedOrThrow {
             opcode == RETURN || opcode == RETURN_WIDE || opcode == RETURN_OBJECT
         }.forEach { index ->
-            addInstructionsAtControlFlowLabel(index, instructions)
+            addInstructionsAtControlFlowLabel(index, helperMethodInvocationInstructions ?: instructions)
         }
     } else {
-        addInstructions(0, instructions)
+        addInstructions(0, helperMethodInvocationInstructions ?: instructions)
     }
 }
 
@@ -1777,18 +1938,37 @@ fun MutableMethod.addInstructionsToEnd(indexFromEnd: Int, smaliInstructions: Str
 fun MutableMethod.addInstructionsToEnd(smaliInstructions: String) =
     this.addInstructionsToEnd(1, smaliInstructions)
 
+private fun MutableMethod.checkReturnTypeNullable() {
+    val returnTypeFirst = returnType.first()
+    check(returnTypeFirst == 'L' || returnTypeFirst == '[') {
+        val returnTypeJava = ReflectionUtils.dexToJavaName(returnType)
+        "Actual return type $returnTypeJava is not nullable"
+    }
+}
+
+private fun MutableMethod.checkReturnType(expectedTypes: Iterable<Class<*>>) {
+    val returnTypeJava = ReflectionUtils.dexToJavaName(returnType)
+    check(expectedTypes.any { returnTypeJava == it.name }) {
+        "Actual return type $returnTypeJava is not contained in expected types: $expectedTypes"
+    }
+}
+
 /**
- * Overrides the first instruction of a method with a boxed `java.lang.Boolean` return value.
- * None of the method code will ever execute.
+ * Returns all classes an instance of `this` can be assigned to.
  */
-fun MutableMethod.returnBoxedBooleanEarly(value: Boolean) {
-    check(returnType == "Ljava/lang/Boolean;" || returnType == "Ljava/lang/Object;") {
-        RETURN_TYPE_MISMATCH
+private fun Class<*>.allAssignableTypes(): Set<Class<*>> {
+    val result = mutableSetOf<Class<*>>()
+
+    fun visit(child: Class<*>?) {
+        if (child == null || !result.add(child)) {
+            return
+        }
+
+        child.interfaces.forEach(::visit)
+        visit(child.superclass)
     }
 
-    addInstructions(0,
-        """
-            sget-object v0, Ljava/lang/Boolean;->${if (value) "TRUE" else "FALSE" }:Ljava/lang/Boolean;
-            return-object v0
-        """.trimIndent())
+    visit(this)
+
+    return result
 }

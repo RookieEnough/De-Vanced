@@ -6,7 +6,7 @@ package app.morphe.patches.peacocktv
 
 import app.morphe.patches.shared.compat.AppCompatibilities
 import app.morphe.patcher.patch.bytecodePatch
-import app.morphe.util.returnEarly
+import app.morphe.util.returnEarlyNull
 
 @Suppress("unused")
 val hideAdsPatch = bytecodePatch(
@@ -17,6 +17,6 @@ val hideAdsPatch = bytecodePatch(
 
     execute {
         // Target method returns Object; return null to abort service construction.
-        MediaTailerAdServiceMethodFingerprint.method.returnEarly(null)
+        MediaTailerAdServiceMethodFingerprint.method.returnEarlyNull()
     }
 }

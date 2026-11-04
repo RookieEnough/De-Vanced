@@ -15,6 +15,6 @@ val openLinksExternallyPatch = bytecodePatch(
     execute {
         // Force the in-app-browser decision to always skip the in-app browser,
         // which is exactly what enabling the app's "Open links in external browser" setting does.
-        ShouldOpenInAppBrowserFingerprint.method.returnEarly(false)
+        GetInAppBrowserSkipReasonFingerprint.method.returnEarly("user_prefers_external")
     }
 }

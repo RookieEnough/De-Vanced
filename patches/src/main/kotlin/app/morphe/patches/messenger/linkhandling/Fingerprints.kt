@@ -1,14 +1,16 @@
 package app.morphe.patches.messenger.linkhandling
 
 import app.morphe.patcher.Fingerprint
+import com.android.tools.smali.dexlib2.AccessFlags
 
 /**
- * Matches the method that decides whether a URL should open in the in-app browser.
- * It returns `true` to use the in-app browser and `false` to skip it (open externally);
- * one of its skip reasons is `user_prefers_external`, logged under `iab_skipped_reason`.
+ * Matches the method that returns why a URL should skip the in-app browser.
+ * A `null` result opens the in-app browser, any reason opens the link externally.
+ * One of its reasons is `user_prefers_external`, set by the app's "Open links in external browser" setting.
  */
-internal object ShouldOpenInAppBrowserFingerprint : Fingerprint(
-    parameters = listOf("Landroid/net/Uri;", "Lcom/facebook/auth/usersession/FbUserSession;"),
-    returnType = "Z",
-    strings = listOf("iab_skipped_reason", "user_prefers_external"),
+internal object GetInAppBrowserSkipReasonFingerprint : Fingerprint(
+    accessFlags = listOf(AccessFlags.PRIVATE, AccessFlags.FINAL),
+    returnType = "Ljava/lang/String;",
+    parameters = listOf("Landroid/net/Uri;", "Lcom/facebook/auth/usersession/FbUserSession;", "L"),
+    strings = listOf("no_capability", "user_prefers_external"),
 )
